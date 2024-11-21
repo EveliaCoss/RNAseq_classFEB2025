@@ -1,0 +1,40 @@
+---
+title: "Ejemplo del entregable"
+author: "Evelia Coss"
+date: "2024-11-21"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+Descripción del equipo:
+
+- **Equipo:** numero de equipo
+- **Integrantes:** Nombres completos
+- **Correos electrónicos de los integrantes**
+
+Descripción de los datos:
+
+- **Bioproject:** [PRJNA759864](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE183266)
+- **Especie:** *Homo sapiens*
+- **Tipo de bibliotecas:** *paired-end*
+- **Método de selección:** Eliminación de rRNA y mRNA de globina (Illumina RNA TruSeq Stranded tRNA con Ribo-Zero Globin)
+- **Número de transcriptomas:** 6
+- **Número de réplicas biológicas:** 3 replicas biológicas por condición (control y tratamiento)
+- **Secuenciador empleado:** Illumina HiSeq 4000 
+- **Distribución de las muestras**: 
+  + Control: 3 replicas biológicas de celulas eritroides en el dia 0 (SRX11996006, SRX11996007, SRX11996008)
+  + Tratamiento: 3 replicas biológicas de celulas eritroides en el dia 11 (SRX11996041, SRX11996039, SRX11996040)
+- **Profundidad de secuenciación de cada transcriptoma:**: 27 M seq 
+- **Tamaño de las lecturas:** 150 bp
+- **Artículo científico:** Georgolopoulos G, Psatha N, Iwata M, Nishida A *et al.* Discrete regulatory modules instruct hematopoietic lineage commitment and differentiation. Nat Commun 2021 Nov 23;12(1):6790. PMID: [34815405](https://pubmed.ncbi.nlm.nih.gov/34815405/)
+
+
+Los datos se pueden descargar desde [NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE183266) o usando [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJNA759864).
+
+
+
+
