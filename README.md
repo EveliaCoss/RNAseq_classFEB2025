@@ -30,7 +30,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 - Fecha: martes 27 de Febrero 2024
 - Presentación:
-    - [Aspectos generales de RNA-Seq](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#1)
+    - [Aspectos generales de RNA-Seq](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#1)
     - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#43)
     - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#65)
 - Datos: `/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/`
