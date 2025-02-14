@@ -1061,6 +1061,16 @@ Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB202
 
 ---
 
+### Bioproject prohibidos / NO SE PUEDEN USAR
+
+- Usados por sus companeros:
+PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
+ 
+- Bioproject dados en cursos (NO SE PUEDEN USAR): PRJNA649971 (Mm) - RNASeq_Workshop_Nov2023 y RNAseq_classFEB2024, PRJNA821620 (At) - RNAseq_classFEB2023
+
+
+---
+
 class: inverse, center, middle
 
 `r fontawesome::fa("terminal", height = "3em")`
