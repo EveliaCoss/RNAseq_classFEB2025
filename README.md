@@ -31,10 +31,10 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
 - Fecha: martes 25 de febrero 2025
 - Presentación:
     - [Aspectos generales de RNA-Seq](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#1)
-    - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#43)
-    - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#65)
-- Datos: `/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/`
-- Tarea: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 58 y moodle ENES](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#62)
+    - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#43)
+    - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#68)
+- Datos: `/mnt/Guanina/bioinfo24/data/Clase_RNASeq2025/`
+- Tarea: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 60 y Google Classroom ENES](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#64)
 
 > Bioproject que usaron anteriormente (NO SE PUEDEN USAR): PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
 >
@@ -51,7 +51,7 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
 
 - Fecha: jueves 27 de febrero 2025
 - Presentación:
-    - [Diversos pipeline para Alineamiento, ensamblaje y conteo de reads](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia2_QCAlineamiento.html#1)
+    - [Diversos pipeline para Alineamiento, ensamblaje y conteo de reads](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia2_QCAlineamiento.html#1)
 - Lecturas y cursos recomendados:
     - Alineamiento *de novo* - [Trinity](https://github.com/trinityrnaseq/trinityrnaseq)
     - Alineamiento con el genoma de referencia - [STAR](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf)
@@ -62,8 +62,8 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
 
 - Fecha: martes 4 de marzo 2025
 - Presentación:
-    - [Importar datos en R, Normalización y Corrección por batch / DEG con DESeq2](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia3_ImportarDatos.html#1)
-- Scripts: https://github.com/EveliaCoss/RNAseq_classFEB2024/tree/main/Practica_Dia3/scripts/
+    - [Importar datos en R, Normalización y Corrección por batch / DEG con DESeq2](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia3_ImportarDatos.html#1)
+- Scripts: https://github.com/EveliaCoss/RNAseq_classFEB2025/tree/main/Practica_Dia3/scripts/
 - Lecturas y cursos recomendados:
     - [Metodos de normalizacion](https://hbctraining.github.io/DGE_workshop/lessons/02_DGE_count_normalization.html#2-create-deseq2-object)
     - [RNA-seq workflow: gene-level exploratory analysis and differential expression](https://www.bioconductor.org/packages/devel/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html#pca-plot-using-generalized-pca)
@@ -75,7 +75,7 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
 
 - Fecha: jueves 6 de marzo 2025
 - Presentación:
-   - [GSEA - Análisis funcional](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia4_GSEA.html#1)
+   - [GSEA - Análisis funcional](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia4_GSEA.html#1)
 - Lecturas y cursos recomendados:
     - Base de datos [Gene Ontology Resource](http://geneontology.org/)
     - Base de datos [AmiGo2](https://amigo.geneontology.org/amigo/landing)
