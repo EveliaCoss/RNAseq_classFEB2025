@@ -2,7 +2,11 @@
 
 Instructora: Dra. Evelia Coss, Posdoc de la Dra. Alejandra Medina, LIIGH-UNAM
 
+<<<<<<< HEAD
 Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (25 y 27 Febrero, 4 y 6 Marzo 2025). Formando parte de la clase de Bioinformática y Estadística 2. 
+=======
+Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (25, 27 Febrero, 4 y 6 Marzo 2025). Formando parte de la clase de Bioinformática y Estadística 2. 
+>>>>>>> 025a18efbbe7041b76293bc9da844ebeaaef6543
 
 ## Descripción
 
@@ -35,6 +39,11 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
     - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#65)
 - Datos: `/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/`
 - Tarea: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 58 y moodle ENES](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#62)
+
+> Bioproject que usaron anteriormente (NO SE PUEDEN USAR): PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
+>
+> Bioproject dados en cursos (NO SE PUEDEN USAR): PRJNA649971 (Mm) - [RNASeq_Workshop_Nov2023](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023) y [RNAseq_classFEB2024](https://github.com/EveliaCoss/RNAseq_classFEB2024), PRJNA821620 (At) - [RNAseq_classFEB2023](https://github.com/EveliaCoss/RNAseq_classFEB2023)
+
 - Lecturas y cursos recomendados:
     - [Mi Clase de 2023](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023)
     - [Introduction to RNAseq Methods - Presentacion](https://bioinformatics-core-shared-training.github.io/Bulk_RNAseq_Course_Nov22/Bulk_RNAseq_Course_Base/Markdowns/01_Introduction_to_RNAseq_Methods.pdf)
@@ -103,24 +112,10 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
 
   **9)** Análisis de Terminos funcionales (GO terms)
 
-## Clase de retroalimentación (24 mayo 2024)
+## Clase de retroalimentación (Fecha pendiente)
 
-- [Presentacion](https://docs.google.com/presentation/d/1Nw1wUBIGy701K5fmokmiSAWEl2UZGYrLvMjFJEsoeNQ/edit?usp=sharing)
-- [Script](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Retroalimentacion_Bioinfo2024.R)
-- Informacion fuente:
-    - [Analyzing RNA-seq data with DESeq2 - Michael Love - Contrast](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#contrasts)
-    - [tutorial about contrasts](https://github.com/tavareshugo/tutorial_DESeq2_contrasts)
-    - [tutorial about contrasts - code](https://github.com/tavareshugo/tutorial_DESeq2_contrasts/blob/main/DESeq2_contrasts.md)
 
-## Clases previas 📗
 
-- Introduccion a Rmarkdown
-  
-En la clase previa les enseñe a crear reportes en Rmarkdown, si necesitan revisar la clase les dejo el link: https://github.com/EveliaCoss/RmarkdownGraphs_notes
-
-- Crear llaves y alias
- 
-También aprendimos a crear llaves (ssh-keygen) y alias para acceder a los servidores de una manera segura y rápida: https://github.com/EveliaCoss/keygen
 
 ## Cursos para practicar 📕
 
