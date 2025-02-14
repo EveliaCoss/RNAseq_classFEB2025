@@ -2,7 +2,7 @@
 
 Instructora: Dra. Evelia Coss, Posdoc de la Dra. Alejandra Medina, LIIGH-UNAM
 
-Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (27 Feb - 1 Marzo 2024). Formando parte de la clase de Bioinformática y Estadística 2. 
+Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (25, 27 Febrero, 4 y 6 Marzo 2025). Formando parte de la clase de Bioinformática y Estadística 2. 
 
 ## Descripción
 
@@ -28,7 +28,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 1. Aspectos generales de RNA-Seq / Control de calidad de los datos
 
-- Fecha: martes 27 de Febrero 2024
+- Fecha: martes 25 de febrero 2025
 - Presentación:
     - [Aspectos generales de RNA-Seq](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#1)
     - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#43)
@@ -49,7 +49,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 2. Diversos pipeline para Alineamiento, ensamblaje y conteo de reads
 
-- Fecha: miércoles 28 de Febrero 2024
+- Fecha: jueves 27 de febrero 2025
 - Presentación:
     - [Diversos pipeline para Alineamiento, ensamblaje y conteo de reads](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia2_QCAlineamiento.html#1)
 - Lecturas y cursos recomendados:
@@ -60,7 +60,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 3. Importar datos en R, Normalización y Corrección por batch effect 🪲 / DEG con DESeq2
 
-- Fecha: jueves 29 de Febrero 2024
+- Fecha: martes 4 de marzo 2025
 - Presentación:
     - [Importar datos en R, Normalización y Corrección por batch / DEG con DESeq2](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia3_ImportarDatos.html#1)
 - Scripts: https://github.com/EveliaCoss/RNAseq_classFEB2024/tree/main/Practica_Dia3/scripts/
@@ -73,7 +73,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 4. GSEA - Análisis funcional
 
-- Fecha: viernes 1 de marzo 2024
+- Fecha: jueves 6 de marzo 2025
 - Presentación:
    - [GSEA - Análisis funcional](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia4_GSEA.html#1)
 - Lecturas y cursos recomendados:
@@ -108,24 +108,10 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
   **9)** Análisis de Terminos funcionales (GO terms)
 
-## Clase de retroalimentación (24 mayo 2024)
+## Clase de retroalimentación (Fecha pendiente)
 
-- [Presentacion](https://docs.google.com/presentation/d/1Nw1wUBIGy701K5fmokmiSAWEl2UZGYrLvMjFJEsoeNQ/edit?usp=sharing)
-- [Script](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Retroalimentacion_Bioinfo2024.R)
-- Informacion fuente:
-    - [Analyzing RNA-seq data with DESeq2 - Michael Love - Contrast](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#contrasts)
-    - [tutorial about contrasts](https://github.com/tavareshugo/tutorial_DESeq2_contrasts)
-    - [tutorial about contrasts - code](https://github.com/tavareshugo/tutorial_DESeq2_contrasts/blob/main/DESeq2_contrasts.md)
 
-## Clases previas 📗
 
-- Introduccion a Rmarkdown
-  
-En la clase previa les enseñe a crear reportes en Rmarkdown, si necesitan revisar la clase les dejo el link: https://github.com/EveliaCoss/RmarkdownGraphs_notes
-
-- Crear llaves y alias
- 
-También aprendimos a crear llaves (ssh-keygen) y alias para acceder a los servidores de una manera segura y rápida: https://github.com/EveliaCoss/keygen
 
 ## Cursos para practicar 📕
 
