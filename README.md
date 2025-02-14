@@ -2,11 +2,7 @@
 
 Instructora: Dra. Evelia Coss, Posdoc de la Dra. Alejandra Medina, LIIGH-UNAM
 
-<<<<<<< HEAD
 Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (25 y 27 Febrero, 4 y 6 Marzo 2025). Formando parte de la clase de Bioinformática y Estadística 2. 
-=======
-Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (25, 27 Febrero, 4 y 6 Marzo 2025). Formando parte de la clase de Bioinformática y Estadística 2. 
->>>>>>> 025a18efbbe7041b76293bc9da844ebeaaef6543
 
 ## Descripción
 
