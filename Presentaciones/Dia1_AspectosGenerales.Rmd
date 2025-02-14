@@ -2,7 +2,7 @@
 title: "Workshop: Análisis de datos de RNA-Seq"
 subtitle: "⚔<br/>Aspectos generales de RNA-Seq / Control de calidad de los datos"  
 author: "Dra. Evelia Coss"
-date: "27/02/2025"
+date: "25/02/2025"
 output:
   xaringan::moon_reader:
     css: 
@@ -184,7 +184,7 @@ Investigadora Posdoctoral en el Laboratorio Internacional de Investigación sobr
 ----
 
 .center[
-Hacer de ustedes **bioinformáticos** aptos en sus nuevos laboratorios. 
+Formarlos como **bioinformáticos competentes** en sus nuevos laboratorios.
 ]
 
 ```{r, echo=FALSE, out.width='60%', fig.align='center'}
@@ -375,10 +375,8 @@ knitr::include_graphics("figures/meme2.jpg")
 ```
 
 ---
-# Flujo experimental de RNA-Seq
+# Métodos de selección
 ----
-
-### Métodos de selección
 
 ```{r, echo=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics("figures/Figura4.png")
@@ -650,7 +648,7 @@ Imagen proveniente de [mRNA-Seq data analysis workflow](https://biocorecrg.githu
 
 ---
 ### Descarga de los datos
-## Después de la secuenciación, verifica que tus datos se descargaran correctamente
+## Después de la secuenciación, verifica que tus datos se hayan descargado correctamente
 
 ```{r, echo=FALSE, out.width='40%', fig.align='center'}
 knitr::include_graphics("figures/Figura15.png")
@@ -670,7 +668,7 @@ cat KO*/MD5.txt
 
 ---
 ### Descarga de los datos
-## Es super importante esta verificación, ya que solo cuentas con unos días para descargar el archivo
+## Esta verificación es muy importante, ya que solo cuentas con unos días para descargar el archivo
 
 ```{r, echo=FALSE, out.width='70%', fig.align='center'}
 knitr::include_graphics("figures/Figura16.png")
@@ -757,9 +755,9 @@ El valor máximo de calidad es ~40 (zona .green[verde]) y los valores < 20 se co
 knitr::include_graphics("figures/Calidad_Phred_33.png")
 ```
 
-
 .left[.footnote[.black[
 Imagen creada por Evelia Coss. Pagina creada por mi equipo - [Formato FASTQ en Wikipedia](https://es.wikipedia.org/wiki/Formato_FASTQ)
+]]]
 
 ---
 
@@ -999,10 +997,10 @@ knitr::include_graphics("figures/Figura17.png")
 
 # En resumen
 
-- Identificar problemas de secuenciación y determinar si es necesario ponerse en contacto con el centro de secuenciación.
-- Examinar las lecturas para garantizar que sus métricas de calidad se ajustan a las expectativas de nuestro experimento.
-- Obtener información sobre la complejidad de la biblioteca (contaminación por rRNA, duplicaciones)
-- Garantizar que el organismo está correctamente representado por el contenido de %GC (aunque a veces esta métrica puede estar desactivada si hay muchos genes sobreexpresados).
+- Identificar **problemas de secuenciación** y determinar si es necesario ponerse en contacto con el centro de secuenciación.
+- Examinar las lecturas para garantizar que sus **métricas de calidad** se ajustan a las expectativas de nuestro experimento.
+- Obtener información sobre la **complejidad de la biblioteca** (contaminación por rRNA, duplicaciones, etc.)
+- Garantizar que el organismo está correctamente representado por el **contenido de %GC** (aunque a veces esta métrica puede estar desactivada si hay muchos genes sobreexpresados).
 
 ---
 
@@ -1027,7 +1025,7 @@ Cada equipo tendrá que buscar, descargar y analizar datos de RNA-Seq que proven
 Para la elección de los datos deberán:
 
 .content-box-red[
-  - **Especie modelo** (*Homo sapiens, Mus musculus, Drosophila melanogaster o Arabidopsis thaliana*).
+  - Usar una **especie modelo** (*Homo sapiens, Mus musculus, Drosophila melanogaster o Arabidopsis thaliana*).
   - Solo datos de bulk RNA-seq
   - Contar con un mínimo de **3 réplicas biológicas por condición**.
   - Datos provenientes de un **artículo científico** (lo necesitaras para la discusión).
@@ -1041,11 +1039,11 @@ Para la elección de los datos deberán:
 
 .content-box-gray[
 - Bioproject
-- Especie (*Homo sapiens, Mus musculus, Drosophila melanogaster o Arabidopsis thaliana*)
-- Tipo de bibliotecas (*paired-end* o *single-end*)
+- Especie: (*Homo sapiens, Mus musculus, Drosophila melanogaster o Arabidopsis thaliana*)
+- Tipo de bibliotecas: (*paired-end* o *single-end*)
 - Método de selección (ej: poly A)
-- Número de transcriptomas
-- Número de réplicas biológicas
+- Número de transcriptomas: (Minimo deber tener 6, 3 de control y 3 de tratamiento)
+- Número de réplicas biológicas: 3 de control y 3 de tratamiento (Colocar el SRA de cada uno)
 - Secuenciador empleado
 - Distribución de las muestras (control y tratamiento) (¿Cuántos hay de cada uno?)
 - Profundidad de secuenciación de cada transcriptoma (en M seq o M reads)
@@ -1055,19 +1053,22 @@ Para la elección de los datos deberán:
 
 > NOTA: puedes hacerlo en una tabla.
 
-Enviar al correo ecoss@liigh.unam.mx. 
-
 Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB2025/Entregable_ejemplo1.html)
+
+**Subir en la tarea de Classroom**
 
 ---
 
-### Bioproject prohibidos / NO SE PUEDEN USAR
+## Bioproject prohibidos 
 
-- Usados por sus companeros:
-PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
+#### NO SE PUEDEN USAR en sus proyectos
+
+.content-box-red[
+
+- **Bioprojects previamente utilizados:** PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
  
-- Bioproject dados en cursos (NO SE PUEDEN USAR): PRJNA649971 (Mm) - RNASeq_Workshop_Nov2023 y RNAseq_classFEB2024, PRJNA821620 (At) - RNAseq_classFEB2023
-
+- **Bioprojects asignados en cursos:** PRJNA649971 (Mm) - [RNASeq_Workshop_Nov2023](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023) y [RNAseq_classFEB2024](https://github.com/EveliaCoss/RNAseq_classFEB2024), PRJNA821620 (At) - [RNAseq_classFEB2023](https://github.com/EveliaCoss/RNAseq_classFEB2023)
+] 
 
 ---
 
@@ -1151,25 +1152,25 @@ ls
 ---
 # `mkdir`: Crear nuevas carpetas
 
-Crear una nueva carpeta que se llame "Curso_RNASeq" y que contenga dos carpetas internas: `data/` y `graph/`.
+Crear una nueva carpeta que se llame "Curso_RNASeq2025" y que contenga dos carpetas internas: `data/` y `graph/`.
 
 ```{bash, eval=F}
 cd data
-mkdir Clase_RNASeq2024 
+mkdir Clase_RNASeq2025 
 ```
 
 Movernos a esta nueva carpeta y generar las otras dos carpetas:
 
 ```{bash, eval=F}
-cd Clase_RNASeq2024
+cd Clase_RNASeq2025
 mkdir data 
 mkdir counts
 ```
 
-Cuando terminen tendrán la siguiente distribución en sus carpetas. El directorio donde estamos localizados es `Clase_RNASeq2024/`.
+Cuando terminen tendrán la siguiente distribución en sus carpetas. El directorio donde estamos localizados es `Clase_RNASeq2025/`.
 
 ```{bash, eval=F}
-Clase_RNASeq2024/ # directorio de trabajo donde nos localizamos
+Clase_RNASeq2025/ # directorio de trabajo donde nos localizamos
 |- data/
 |- counts/
 ```
