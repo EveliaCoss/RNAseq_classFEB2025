@@ -2,7 +2,7 @@
 
 Instructora: Dra. Evelia Coss, Posdoc de la Dra. Alejandra Medina, LIIGH-UNAM
 
-Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (27 Feb - 1 Marzo 2024). Formando parte de la clase de Bioinformática y Estadística 2. 
+Clases para los alumnos de Ciencias Genomicas de 4to semestre de la ENES, Juriquilla (25 y 27 Febrero, 4 y 6 Marzo 2025). Formando parte de la clase de Bioinformática y Estadística 2. 
 
 ## Descripción
 
@@ -17,7 +17,7 @@ El módulo consta de sesiones teóricas y prácticas impartidas de forma presenc
 - Análisis funcional de los genes detectados
 - Visualización grafica de los resultados
 
-Se darán presentaciones detalladas del uso de programas clave, todos de código fuente abierto, usando datos tomados de las bases de datos. También se presentará el uso de algunos scripts de Bash y R muy sencillos, con el objetivo de aprender los aspectos básicos de estos lenguajes para el análisis de datos transcriptómico.
+Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos de código abierto, utilizando datos extraídos de bases de datos. Además, se introducirá el uso de scripts sencillos en Bash y R, con el objetivo de aprender los conceptos básicos de estos lenguajes para el análisis de datos transcriptómicos.
 
 ## Contenido 📌
 
@@ -28,7 +28,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 1. Aspectos generales de RNA-Seq / Control de calidad de los datos
 
-- Fecha: martes 27 de Febrero 2024
+- Fecha: martes 25 de febrero 2025
 - Presentación:
     - [Aspectos generales de RNA-Seq](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#1)
     - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#43)
@@ -44,7 +44,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 2. Diversos pipeline para Alineamiento, ensamblaje y conteo de reads
 
-- Fecha: miércoles 28 de Febrero 2024
+- Fecha: jueves 27 de febrero 2025
 - Presentación:
     - [Diversos pipeline para Alineamiento, ensamblaje y conteo de reads](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia2_QCAlineamiento.html#1)
 - Lecturas y cursos recomendados:
@@ -55,7 +55,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 3. Importar datos en R, Normalización y Corrección por batch effect 🪲 / DEG con DESeq2
 
-- Fecha: jueves 29 de Febrero 2024
+- Fecha: martes 4 de marzo 2025
 - Presentación:
     - [Importar datos en R, Normalización y Corrección por batch / DEG con DESeq2](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia3_ImportarDatos.html#1)
 - Scripts: https://github.com/EveliaCoss/RNAseq_classFEB2024/tree/main/Practica_Dia3/scripts/
@@ -68,7 +68,7 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
 
 ### Dia 4. GSEA - Análisis funcional
 
-- Fecha: viernes 1 de marzo 2024
+- Fecha: jueves 6 de marzo 2025
 - Presentación:
    - [GSEA - Análisis funcional](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia4_GSEA.html#1)
 - Lecturas y cursos recomendados:

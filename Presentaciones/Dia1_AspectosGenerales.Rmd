@@ -158,16 +158,13 @@ Investigadora Posdoctoral en el Laboratorio Internacional de Investigación sobr
 ### `r fontawesome::fa("star", fill = "#181818")` Miembro
 
 - [LupusRGMX](https://twitter.com/LupusRgmx)
-
 - [Proyecto JAGUAR](https://twitter.com/PJaguarLATAM)
-
 - [Rladies Morelia](https://www.facebook.com/profile.php?id=100093337606435)
-
 - [CDSB - Mexico](https://twitter.com/CDSBMexico)
-
 - [RIABIO](https://twitter.com/RiaBioNet)
-
 - [The Carpentries](https://carpentries.org/index.html)
+- [ISCB-RSG Mexico](https://rsg-mexico.iscbsc.org/)
+- [ISCB Wikipedia team](https://x.com/iscbwikiteam)
 ]
 
 
@@ -176,9 +173,7 @@ Investigadora Posdoctoral en el Laboratorio Internacional de Investigación sobr
 ### `r fontawesome::fa("circle-nodes", fill = "#181818")` Formación académica
 
 - Doctorado en Biotecnología de Plantas, [Cinvestav, Langebio](https://twitter.com/uga_langebio),  [`r fontawesome::fa("link")` Dra Selene Fernandez-Valverde](https://twitter.com/SelFdz)
-
 - Maestría en Biotecnología de Plantas, [Cinvestav, Unidad Irapuato](https://twitter.com/CinvestavIra)
-
 - Ing. en Biotecnología, [UPSIN](https://www.facebook.com/UPSINSINALOA)
 
 ]
@@ -382,6 +377,8 @@ knitr::include_graphics("figures/meme2.jpg")
 ---
 # Flujo experimental de RNA-Seq
 ----
+
+### Métodos de selección
 
 ```{r, echo=FALSE, out.width='100%', fig.align='center'}
 knitr::include_graphics("figures/Figura4.png")
@@ -598,7 +595,7 @@ Imagen proveniente de [Hicks, et al. 2015. bioRxiv](https://www.biorxiv.org/cont
 ---
 # Corrección por *Batch effect*
 
-Buen diseño experimental con un minimo de 2 Réplicas biológicas, pero aún puede haber variación técnica.
+Buen diseño experimental con un **minimo de 3 Réplicas biológicas**, pero aún puede haber variación técnica.
 
 ```{r, echo=FALSE, out.width='60%', fig.align='center'}
 knitr::include_graphics("figures/batch_effect_pca2.png")
@@ -642,7 +639,7 @@ class: inverse, center, middle
 
 .pull-right[
 
-```{r, echo=FALSE, out.width='80%', fig.align='center', fig.pos='top'}
+```{r, echo=FALSE, out.width='90%', fig.align='center', fig.pos='top'}
 knitr::include_graphics("figures/pipeline1.png")
 ```
 ]
@@ -761,10 +758,8 @@ knitr::include_graphics("figures/Calidad_Phred_33.png")
 ```
 
 
-
 .left[.footnote[.black[
-Pagina creada por mi equipo - [Formato FASTQ en Wikipedia](https://es.wikipedia.org/wiki/Formato_FASTQ)
-]]]
+Imagen creada por Evelia Coss. Pagina creada por mi equipo - [Formato FASTQ en Wikipedia](https://es.wikipedia.org/wiki/Formato_FASTQ)
 
 ---
 
@@ -1014,7 +1009,7 @@ knitr::include_graphics("figures/Figura17.png")
 class: inverse, center, middle
 
 `r fontawesome::fa("feather", height = "3em")`
-## Tarea para el **Jueves 29 de Feb**
+## Tarea para el **Jueves 27 de Feb**
 ### Elegir en equipos los transcriptomas que emplearán en su proyecto.
 
 ---
@@ -1023,7 +1018,7 @@ class: inverse, center, middle
 
 ### 1) Elijan a su equipo.
 
-Equipos de 3 personas (3 equipos de 3 personas y un equipo de 2)
+Equipos de 3 personas (3 equipos de 3 personas)
 
 ### 2) Elegir los datos de acuerdo a lo siguiente:
 
@@ -1036,18 +1031,18 @@ Para la elección de los datos deberán:
   - Solo datos de bulk RNA-seq
   - Contar con un mínimo de **3 réplicas biológicas por condición**.
   - Datos provenientes de un **artículo científico** (lo necesitaras para la discusión).
-  - Contar con un **1 contraste como mínimo** (ejemplo: control vs condición 1).
+  - Contar con un **1 contraste como mínimo** (ejemplo: control vs tratamiento).
   - Contar con una buena **calidad de los datos** (FastQC).
 ]
 
 ---
 
-### 3) Deben entregarme un documento en hmtl y Rmd con la **Descripción de los datos** por equipo:
+### 3) Deben entregarme un documento en Rmd y html con la **Descripción de los datos** por equipo:
 
 .content-box-gray[
 - Bioproject
-- Especie
-- Tipo de bibliotecas
+- Especie (*Homo sapiens, Mus musculus, Drosophila melanogaster o Arabidopsis thaliana*)
+- Tipo de bibliotecas (*paired-end* o *single-end*)
 - Método de selección (ej: poly A)
 - Número de transcriptomas
 - Número de réplicas biológicas
@@ -1273,7 +1268,7 @@ Por lo tanto:
 class: center, middle
 
 `r fontawesome::fa("code", height = "3em")`
-# Miércoles 28 de febrero 2024  
+# Jueves 27 de febrero 2025  
 ## Diversos pipeline para Alineamiento, ensamblaje y conteo
 
 Gracias por tu atención, respira y coméntame tus dudas. 
