@@ -35,8 +35,11 @@ Se darán presentaciones detalladas del uso de programas clave, todos de código
     - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#65)
 - Datos: `/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/`
 - Tarea: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 58 y moodle ENES](https://eveliacoss.github.io/RNAseq_classFEB2024/Presentaciones/Dia1_AspectosGenerales.html#62)
-- Bioproject que usaron anteriormente (NO SE PUEDEN USAR): PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
-- Bioproject dados en cursos (NO SE PUEDEN USAR): PRJNA649971 (Mm) - [RNASeq_Workshop_Nov2023](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023) y [RNAseq_classFEB2024](https://github.com/EveliaCoss/RNAseq_classFEB2024), PRJNA821620 (At) - [RNAseq_classFEB2023](https://github.com/EveliaCoss/RNAseq_classFEB2023)
+
+> Bioproject que usaron anteriormente (NO SE PUEDEN USAR): PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
+>
+> Bioproject dados en cursos (NO SE PUEDEN USAR): PRJNA649971 (Mm) - [RNASeq_Workshop_Nov2023](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023) y [RNAseq_classFEB2024](https://github.com/EveliaCoss/RNAseq_classFEB2024), PRJNA821620 (At) - [RNAseq_classFEB2023](https://github.com/EveliaCoss/RNAseq_classFEB2023)
+
 - Lecturas y cursos recomendados:
     - [Mi Clase de 2023](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023)
     - [Introduction to RNAseq Methods - Presentacion](https://bioinformatics-core-shared-training.github.io/Bulk_RNAseq_Course_Nov22/Bulk_RNAseq_Course_Base/Markdowns/01_Introduction_to_RNAseq_Methods.pdf)
