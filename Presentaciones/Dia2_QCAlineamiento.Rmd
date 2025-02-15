@@ -2,7 +2,7 @@
 title: "Workshop: Análisis de datos de RNA-Seq"
 subtitle: "⚔<br/>Alineamiento y conteo de RNA-seq"  
 author: "Dra. Evelia Coss, Sofia Salazar y Diego Ramirez"
-date: "28/02/2024"
+date: "27/02/2025"
 output:
   xaringan::moon_reader:
     css: 
@@ -229,14 +229,13 @@ Para correr este script y descargar las muestras, debemos ir a la carpeta donde 
 
 
 ```{bash, eval = F}
-cd /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/scripts/
+cd /mnt/Guanina/bioinfo25/data/Clase_RNASeq2025/scripts/
 chmod +x downloads.sh
-./download.sh
 ```
 
 Para correr el script, primero me doy permisos de ejecución con `chmod +x` y después ejecuto el script con `./`
 
-> NOTA: Recuerda darle permisos a tu companero:
+> NOTA: Recuerda darle permisos a tus compañer@s:
 
 ```{bash, eval=F}
 setfacl -R -m u:usuario:rwx CARPETA
@@ -245,25 +244,31 @@ setfacl -R -m u:usuario:rwx CARPETA
 ---
 ### Descarga de los datos con `wget`
 
-Ya que las descargas duran mucho es conveniente mandar el script a la cola de ejecución usando un Sun Grid Engine (SGE) `.sge`. Así el script seguirá ejecutándose aunque tu no estes. 
+Ya que las descargas duran mucho es conveniente **mandar el script a la cola de ejecución usando un Sun Grid Engine (SGE)** `.sge`. Así el script seguirá ejecutándose aunque tu no estes. 
 
 Para lo cual hay 2 formas:
+
 A)	Tener un solo script donde todos los datos se descargue. 
+
   - Ejemplo: [download_all_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_all_rawData.sge)
+
 B)	Tener varios script y agilizar la descarga múltiple. 
+
   - Ejemplos: [download_control_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_control_rawData.sge),  [download_15min_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_15min_rawData.sge), [download_30min_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_30min_rawData.sge) y [download_4h_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_4h_rawData.sge).
 
 ---
 
-## Symlink
+## Enlaces simbólicos (symlinks)
+
+Es mejor crear **enlaces simbólicos (symlinks)** en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.
+
+Una modificación realizada utilizando este enlace se reflejará en el original; pero, por el contrario, si se elimina el enlace, no se eliminará el auténtico.
 
 Los datos contenido en `data/` se encuentran presentes dentro de la carpeta con ayuda de un symlink:
 
 ```{bash, eval=FALSE}
 ln -s /mnt/Citosina/amedina/dramirez/clase/data/fastq/* .
 ```
-
-Es una manera de trabajar con los datos sin tener que hacer copias de los mismos. No pesan, pero funcionan como los datos originales.
 
 ---
 

@@ -34,7 +34,7 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
     - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#43)
     - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#68)
 - Datos: `/mnt/Guanina/bioinfo24/data/Clase_RNASeq2025/`
-- Tarea: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 60 y Google Classroom ENES](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#64)
+- Tarea para el jueves 27 de feb: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 60 y Google Classroom ENES](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#64)
 
 > Bioproject que usaron anteriormente (NO SE PUEDEN USAR): PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
 >

@@ -1275,6 +1275,35 @@ Por lo tanto:
 ]
 
 ---
+class: inverse, center, middle
+
+`r fontawesome::fa("terminal", height = "3em")`
+# Actividad en equipos
+##  Orden de los archivos de su proyecto
+
+---
+# Actividad en equipos: 
+
+Organizar el entorno de trabajo en el clúster según los **equipos**. Cada equipo debe crear una carpeta con la siguiente estructura, reemplazando la "X" con el número correspondiente a su equipo:
+
+```
+~/EquipoX/
+├── scripts/           # Código fuente
+    └──out_logs/   # Ejecuciones de los codigos
+├── data/
+│   ├── raw/       # Datos crudos (formato fastq.gz)
+│   └── processed/ # Datos procesados
+├── quality1/ # Archivos html sobre la calidad de las datos crudos
+└── quality2/ # Archivos html sobre la calidad de las datos procesados
+```
+
+> **NOTA:** Asegúrate de otorgar permisos de edición, ejecución y lectura a todos los miembros de tu equipo.
+
+```{bash, eval=F}
+setfacl -R -m u:usuario:rwx EquipoX
+```
+
+---
 
 class: center, middle
 
