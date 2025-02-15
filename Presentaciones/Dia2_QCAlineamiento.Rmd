@@ -140,9 +140,7 @@ class: middle, center
 .left-col[ 
 ### `r fontawesome::fa("dna", fill = "#181818")` Sofía Salazar Magaña
 
-Estudiante de la [Licenciatura en Ciencias Genómicas](https://www.enesjuriquilla.unam.mx/?page_id=2136) @ ENES-J UNAM
-
-Asistente de investigación @ [RegGenoLab](https://liigh.unam.mx/), LIIGH UNAM
+[Licenciatura en Ciencias Genómicas](https://www.enesjuriquilla.unam.mx/?page_id=2136) @ ENES-J UNAM
 
 Asistente de investigación @ [Im Lab](https://hakyimlab.org/), The University of Chicago 
 
@@ -153,7 +151,7 @@ Asistente de investigación @ [Im Lab](https://hakyimlab.org/), The University o
 .center-col[
 ### `r fontawesome::fa("dna", fill = "#181818")` Diego Ramirez
 
-Estudiante de la [Licenciatura en Ciencias Genómicas](https://www.enesjuriquilla.unam.mx/?page_id=2136) @ ENES-J UNAM
+[Licenciatura en Ciencias Genómicas](https://www.enesjuriquilla.unam.mx/?page_id=2136) @ ENES-J UNAM
 
 ]
 
@@ -212,15 +210,61 @@ class: inverse, center, middle
 
 La forma más simple es ir a repositorios de datos públicos, como [GEO (Gene Expression Omnibus)](https://www.ncbi.nlm.nih.gov/geo/), en donde encontraremos los archivos de datos **crudos** y a veces también las **matrices de cuentas ya procesadas** ó a [Recount3](https://rna.recount.bio/) (aquí podemos encontrar datos ya procesados).
 
-**Para esta clase, usaremos las muestras del estudio [GSE155516](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE155516)** provenientes de [Kodali, *et al*. 2021. *Mol Psychiatry*](https://www.nature.com/articles/s41380-020-00955-5).
+**Para esta clase, usaremos las muestras del estudio [GSE250023](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE250023)** provenientes de [Kavita, *et al*. 2024. *JCIinsight*](https://insight.jci.org/articles/view/176556).
+
+- Bioproject: PRJNA1051620, [NHI](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1051620) y [EBI](https://www.ebi.ac.uk/ena/browser/view/PRJNA1051620)
+
+```{r, echo=FALSE, out.width='50%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/LUPUS_disenoexpresimental.jpg")
+```
+
+
+---
 
 ### Descarga de los datos con `wget`
 
-Una vez que seleccionamos el estudio que vamos a usar, entramos a la página de [ebi](https://www.ebi.ac.uk/). En el buscador, tecleamos el ID del estudio.
+.pull-left[
+1. Selecciona el estudio que vas a utilizar.
+2. Ingresa a la página de [EBI](https://www.ebi.ac.uk/).
+3. En el buscador, escribe el ID del estudio y presiona Enter.
+4. En los resultados, ubica la sección **"Nucleotide sequences"** y selecciona el estudio correspondiente.
+5. En la tabla inferior, dirígete a la columna **"Generated FASTQ files: FTP"**.
+6. Selecciona las muestras que deseas descargar.
+7. Haz clic izquierdo en **"Get download script"** para obtener el script de descarga.
+]
 
-Seleccionamos el estudio donde dice **Nucleotide sequences**, y en la tabla inferior, en la columna **Generated FASTQ files:FTP**, seleccionamos las muestras que queremos y damos click izquierdo en donde dice **Get download script**. 
+.pull-right[
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/leer.jpg")
+```
+]
 
 ---
+
+### Bioproject: PRJNA1051620
+
+Este proyecto cuenta con 75 Biosamples (SRA Experiments) de las cuales se seleccionaron las del Dia 7 posterior a la vacuna de COVID-19 (BNT162b2 SARS-CoV-2) en pacientes con Lupus. 
+
+```{r tables-data, echo=FALSE}
+library(dplyr)
+metadata_db <- data.frame(
+  individual = c(rep(1,2), rep(8,2), rep(14, 2), rep(12, 2), rep(17, 2), rep(18,2)),
+  sample = c("S001", "S003", "S006", "S008", "S016", "S018", "S011", "S013", "S021", "S023", "S026", "S028"),
+  condition = c(rep("SLE_R", 6), rep("SLE_NR", 6)),
+  reponder = c(rep("R", 6), rep("NR", 6)),
+  timepoint = c(rep(c(0, 7), 6)),
+  timelabel = c(rep(c("d0", "d7"), 6)),
+  identifiers = c("p1.S001.day0", "p1.S003.day7", "p8.S006.day0", "p8.S008.day7", "p14.S016.day0", "p14.S018.day7", "p12.S011.day0", "p12.S013.day7", "p17.S021.day0", "p17.S023.day7", "p18.S026.day0", "p18.S028.day7"),
+  BioSample = c("SAMN38793003", "SAMN38793001", "SAMN38792999", "SAMN38792997", "SAMN38792990", "SAMN38792988", "SAMN38792994", "SAMN38792993", "SAMN38792985", "SAMN38792983", "SAMN38792980", "SAMN38792978")
+)
+
+# filter 
+knitr::kable(metadata_db %>% filter(timepoint == 7), caption = 'Informacion de la metadata')
+```
+
+
+---
+
 ### Descarga de los datos con `wget`
 
 Esto descargará un script BASH `.sh` como [este](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download.sh), el cual utilizar para descargar las muestras.
