@@ -31,6 +31,7 @@ library(xaringanExtra)
 library(icons)
 library(fontawesome)
 library(emo)
+library(countdown) # remotes::install_github("gadenbuie/countdown", subdir = "r")
 
 # set default options
 opts_chunk$set(collapse = TRUE,
@@ -1055,7 +1056,7 @@ Para la elección de los datos deberán:
 
 Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB2025/Entregable_ejemplo1.html)
 
-**Subir en la tarea de Classroom**
+**Subir en la tarea en Google Classroom**
 
 ---
 
@@ -1141,7 +1142,7 @@ cd ../ # Ir a la carpeta anterior
 # `cd` : Moverse entre carpetas
 
 ```{bash, eval=F}
-cd /mnt/Guanina/bioinfo24/
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/
 ls
 ```
 
@@ -1152,25 +1153,25 @@ ls
 ---
 # `mkdir`: Crear nuevas carpetas
 
-Crear una nueva carpeta que se llame "Curso_RNASeq2025" y que contenga dos carpetas internas: `data/` y `graph/`.
+Crear una nueva carpeta que se llame "BioProject_2025" y que contenga dos carpetas internas: `data/` y `graph/`.
 
 ```{bash, eval=F}
 cd data
-mkdir Clase_RNASeq2025 
+mkdir BioProject_2025 
 ```
 
 Movernos a esta nueva carpeta y generar las otras dos carpetas:
 
 ```{bash, eval=F}
-cd Clase_RNASeq2025
+cd BioProject_2025
 mkdir data 
 mkdir counts
 ```
 
-Cuando terminen tendrán la siguiente distribución en sus carpetas. El directorio donde estamos localizados es `Clase_RNASeq2025/`.
+Cuando terminen tendrán la siguiente distribución en sus carpetas. El directorio donde estamos localizados es `BioProject_2025/`.
 
 ```{bash, eval=F}
-Clase_RNASeq2025/ # directorio de trabajo donde nos localizamos
+BioProject_2025/ # directorio de trabajo donde nos localizamos
 |- data/
 |- counts/
 ```
@@ -1186,13 +1187,13 @@ knitr::include_graphics("figures/rsync.png")
 Descargar Información
 
 ```{bash, eval=F}
-rsync ecoss@liigh.unam.mx:"/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/test.txt" .
+rsync ecoss@liigh.unam.mx:"/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/test.txt" .
 ```
 
 Subir Información
 
 ```{bash, eval=F}
-rsync ./test.txt ecoss@liigh.unam.mx:"/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/"
+rsync ./test.txt ecoss@liigh.unam.mx:"/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/"
 ```
 
 ---
@@ -1225,9 +1226,9 @@ Cada usuario tiene permisos diferentes cuando crea un archivo. Los permisos pued
 
 Los caracteres atribuidos a los permisos son:
 
-- `r` : escritura (Read)
-- `w` : lectura (Write)
-- `x` : ejecución (eXecute)
+- **`r`** : escritura (Read)
+- **`w`** : lectura (Write)
+- **`x`** : ejecución (eXecute)
 
 En el siguiente ejemplo, el usuario cuenta con todos los permisos activos, mientras que el grupo y otros tienen solo permisos de lectura y ejecución.
 
@@ -1241,9 +1242,9 @@ knitr::include_graphics("figures/permisos3.png")
 
 La representación octal de chmod es muy sencilla
 
-- `r` = Lectura tiene el valor de 4
-- `w` = Escritura tiene el valor de 2
-- `x` = Ejecución tiene el valor de 1
+- **`r`** = Lectura tiene el valor de 4
+- **`w`** = Escritura tiene el valor de 2
+- **`x`** = Ejecución tiene el valor de 1
 
 .pull-left[
 
@@ -1303,6 +1304,10 @@ Organizar el entorno de trabajo en el clúster según los **equipos**. Cada equi
 setfacl -R -m u:usuario:rwx EquipoX
 ```
 
+
+```{r timmer, echo=FALSE}
+countdown(minutes = 15, seconds = 00)
+```
 ---
 
 class: center, middle

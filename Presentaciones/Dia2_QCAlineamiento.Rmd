@@ -31,6 +31,7 @@ library(xaringanExtra)
 library(icons)
 library(fontawesome)
 library(emo)
+library(countdown) # remotes::install_github("gadenbuie/countdown", subdir = "r")
 
 # set default options
 opts_chunk$set(collapse = TRUE,
@@ -259,7 +260,10 @@ metadata_db <- data.frame(
 )
 
 # filter 
-knitr::kable(metadata_db %>% filter(timepoint == 7), caption = 'Informacion de la metadata')
+DT::datatable(
+  metadata_db %>% filter(timepoint == 7), caption = 'Informacion de la metadata',
+  fillContainer = FALSE, options = list(pageLength = 8)
+)
 ```
 
 
