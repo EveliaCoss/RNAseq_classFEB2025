@@ -1308,6 +1308,7 @@ setfacl -R -m u:usuario:rwx EquipoX
 ```{r timmer, echo=FALSE}
 countdown(minutes = 15, seconds = 00)
 ```
+
 ---
 
 class: center, middle

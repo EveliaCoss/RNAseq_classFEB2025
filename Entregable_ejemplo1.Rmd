@@ -1,7 +1,7 @@
 ---
 title: "Ejemplo del entregable"
 author: "Evelia Coss"
-date: "2024-11-21"
+date: "2025-02-27"
 output: html_document
 ---
 
@@ -13,7 +13,8 @@ knitr::opts_chunk$set(echo = TRUE)
 Descripción del equipo:
 
 - **Equipo:** numero de equipo
-- **Integrantes:** Nombres completos
+- **Integrantes:** Nombres completos y nombre del usuario en el cluster, 
+    + ejemplo: Evelia Lorena Coss-Navarrete (ecoss)
 - **Correos electrónicos de los integrantes**
 
 Descripción de los datos:
