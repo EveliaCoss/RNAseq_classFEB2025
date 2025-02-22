@@ -31,7 +31,7 @@ library(xaringanExtra)
 library(icons)
 library(fontawesome)
 library(emo)
-library(countdown) # remotes::install_github("gadenbuie/countdown", subdir = "r")
+library(countdown) # remotes::install_github("gadenbuie/countdown", subdir = "r"), Explicacion de su uso: https://pkg.garrickadenbuie.com/countdown/#5
 
 # set default options
 opts_chunk$set(collapse = TRUE,
