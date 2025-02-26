@@ -1,2 +1,2 @@
-wget /mnt/Citosina/amedina/ssalazar/claseSTAR/annotation/ https://hgdownload.soe.ucsc.edu/goldenPath/mm10/bigZips/genes/mm10.knownGene.gtf.gz
-gunzip /mnt/Citosina/amedina/ssalazar/claseSTAR/annotation/mm10.knownGene.gtf.gz
+wget /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/ https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/gencode.v47.annotation.gtf.gz
+gunzip  /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/gencode.v47.annotation.gtf.gz
