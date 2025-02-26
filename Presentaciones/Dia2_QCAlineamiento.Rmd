@@ -130,43 +130,31 @@ background-size: 1210px,210px, cover
 .left[.footnote[R-Ladies Theme[R-Ladies Theme](https://www.apreshill.com/project/rladies-xaringan/)]]
 
 ---
-background-image: url(figures/liigh_unam_logo.png) 
-background-position: 10% 10%
-background-size: 10%
-class: middle, center
 
+# Repaso 
 
-# Sobre mi equipo
-----
-.left-col[ 
-### `r fontawesome::fa("dna", fill = "#181818")` Sofía Salazar Magaña
+.pull-left[
 
-[Licenciatura en Ciencias Genómicas](https://www.enesjuriquilla.unam.mx/?page_id=2136) @ ENES-J UNAM
+### Contraste
 
-Asistente de investigación @ [Im Lab](https://hakyimlab.org/), The University of Chicago 
-
-
-[`r fontawesome::fa("github")` GitHub: SophSM](https://github.com/SophSM)
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/diseno_experimental.png")
+```
 ]
 
-.center-col[
-### `r fontawesome::fa("dna", fill = "#181818")` Diego Ramirez
 
-[Licenciatura en Ciencias Genómicas](https://www.enesjuriquilla.unam.mx/?page_id=2136) @ ENES-J UNAM
+.pull-right[
 
+### Diseño experimental
+
+```{r, echo=FALSE, out.width='50%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/Experimental_design.jpg")
+```
 ]
 
-.right-col[
-<img src="figures/LAB-logo.png", height = "150">
-<img src = "figures/lupus-logo.png">
-<img src = "figures/jaguar-logo.png">
-]
----
-
-class: inverse, center, middle
-
-`r fontawesome::fa("laptop-file", height = "3em")`
-# Overview de una pipeline para analisis de RNA-seq
+.left[.footnote[.black[
+Figura obtenida del [NBIS SciLifeLab](https://scilifelab.github.io/courses/ngsintro/1910/slides/rnaseq/presentation.html#6)
+]]]
 
 ---
 
@@ -183,21 +171,16 @@ Imagen proveniente de [mRNA-Seq data analysis workflow](https://biocorecrg.githu
 ]]]
 
 ---
-
-class: inverse, center, middle
-
-`r fontawesome::fa("file-lines", height = "3em")`
 # Contenido de la clase
 
----
 
-### 1. Descarga de datos públicos de RNA-seq con `wget`
+- 1) Descarga de datos públicos de RNA-seq con `wget`
 
-### 2. Análisis de control de calidad de lecturas
+- 2) Análisis de control de calidad de lecturas
 
-### 3. Trimming
+- 3) Trimming
 
-### 4. Alineamiento con el genoma de referencia mediante STAR
+- 4) Alineamiento con el genoma de referencia mediante STAR
 
 ---
 
@@ -213,7 +196,7 @@ La forma más simple es ir a repositorios de datos públicos, como [GEO (Gene Ex
 
 **Para esta clase, usaremos las muestras del estudio [GSE250023](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE250023)** provenientes de [Kavita, *et al*. 2024. *JCIinsight*](https://insight.jci.org/articles/view/176556).
 
-- Bioproject: PRJNA1051620, [NHI](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1051620) y [EBI](https://www.ebi.ac.uk/ena/browser/view/PRJNA1051620)
+- Bioproject: PRJNA1051620, [NIH](https://www.ncbi.nlm.nih.gov/bioproject/PRJNA1051620) y [EBI](https://www.ebi.ac.uk/ena/browser/view/PRJNA1051620)
 
 ```{r, echo=FALSE, out.width='50%', fig.align='center', fig.pos='top'}
 knitr::include_graphics("figures/LUPUS_disenoexpresimental.jpg")
@@ -242,9 +225,26 @@ knitr::include_graphics("figures/leer.jpg")
 
 ---
 
+### Bioproject, Biosample y SRA
+
+En pocas palabras, **SRA contiene los datos crudos de secuenciación** obtenidos de **muestras biológicas** (BioSamples) dentro de un **estudio** (BioProject).
+
+
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/Biosample.png")
+```
+
+.left[.footnote[.black[
+Imagen proveniente de [NCBI](https://www.ncbi.nlm.nih.gov/sra/docs/submitbio/)
+]]]
+
+---
+
 ### Bioproject: PRJNA1051620
 
-Este proyecto cuenta con 75 Biosamples (SRA Experiments) de las cuales se seleccionaron las del Dia 7 posterior a la vacuna de COVID-19 (BNT162b2 SARS-CoV-2) en pacientes con Lupus. 
+En este proyecto se analizaron **18 pacientes con lupus**, contando con 4 tomas en el tiempo posterior a la **vacunación contra COVID-19 (BNT162b2 SARS-CoV-2)**, lo que resultó en un total de 75 biosamples (SRA Experiments).
+
+Para fines de esta práctica, se seleccionaron aquellas correspondientes al **día 7** posterior a la vacunación contra COVID-19 (BNT162b2 SARS-CoV-2) en pacientes con lupus.
 
 ```{r tables-data, echo=FALSE}
 library(dplyr)
@@ -261,7 +261,7 @@ metadata_db <- data.frame(
 
 # filter 
 DT::datatable(
-  metadata_db %>% filter(timepoint == 7), caption = 'Informacion de la metadata',
+  metadata_db %>% filter(timepoint == 7), caption = 'Información de la metadata',
   fillContainer = FALSE, options = list(pageLength = 8)
 )
 ```
@@ -271,17 +271,13 @@ DT::datatable(
 
 ### Descarga de los datos con `wget`
 
-Esto descargará un script BASH `.sh` como [este](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download.sh), el cual utilizar para descargar las muestras.
+Esto descargará un script BASH `.sh` como [este](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/PRJNA1051620_download.sh), el cual utilizar para descargar las muestras.
 
-Para correr este script y descargar las muestras, debemos ir a la carpeta donde las queremos guardar y ahí guardamos el script. Supongamos que yo renombré mi script a [`download.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download.sh). Y lo tengo en una carpeta llamada `scripts`.
-
+Para correr este script y descargar las muestras, debemos ir a la carpeta donde las queremos guardar y ahí guardamos el script. Supongamos que yo renombré mi script a [`PRJNA1051620_download.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/PRJNA1051620_download.sh). Y lo tengo en una carpeta llamada `scripts`.
 
 ```{bash, eval = F}
-cd /mnt/Guanina/bioinfo25/data/Clase_RNASeq2025/scripts/
-chmod +x downloads.sh
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/scripts/
 ```
-
-Para correr el script, primero me doy permisos de ejecución con `chmod +x` y después ejecuto el script con `./`
 
 > NOTA: Recuerda darle permisos a tus compañer@s:
 
@@ -290,33 +286,14 @@ setfacl -R -m u:usuario:rwx CARPETA
 ```
 
 ---
+
 ### Descarga de los datos con `wget`
 
-Ya que las descargas duran mucho es conveniente **mandar el script a la cola de ejecución usando un Sun Grid Engine (SGE)** `.sge`. Así el script seguirá ejecutándose aunque tu no estes. 
+Ya que las descargas tardan mucho, es conveniente enviar el script a la cola de ejecución usando **Sun Grid Engine (SGE)** con un archivo .sge. De esta manera, el script seguirá ejecutándose aunque tú no estés. 
 
-Para lo cual hay 2 formas:
+Es necesario tener un solo script donde todos los datos se descargue. 
 
-A)	Tener un solo script donde todos los datos se descargue. 
-
-  - Ejemplo: [download_all_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_all_rawData.sge)
-
-B)	Tener varios script y agilizar la descarga múltiple. 
-
-  - Ejemplos: [download_control_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_control_rawData.sge),  [download_15min_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_15min_rawData.sge), [download_30min_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_30min_rawData.sge) y [download_4h_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/download_4h_rawData.sge).
-
----
-
-## Enlaces simbólicos (symlinks)
-
-Es mejor crear **enlaces simbólicos (symlinks)** en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.
-
-Una modificación realizada utilizando este enlace se reflejará en el original; pero, por el contrario, si se elimina el enlace, no se eliminará el auténtico.
-
-Los datos contenido en `data/` se encuentran presentes dentro de la carpeta con ayuda de un symlink:
-
-```{bash, eval=FALSE}
-ln -s /mnt/Citosina/amedina/dramirez/clase/data/fastq/* .
-```
+  - Ejemplo: [download_all_rawData.sge](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/download_all_rawData.sge)
 
 ---
 
@@ -354,17 +331,17 @@ También creamos una carpeta para los outputs de `fastqc`
 qlogin # pedir un nodo de prueba, default = 2GB
 module load fastqc/0.11.3
 module load multiqc/1.5
-cd /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/
 mkdir quality1
 ```
 
-Después, usaremos un `for loop` para hacer `fastqc` a todos los archivos que tengan terminación `.fastq.gz`
+Después, usaremos un `for loop` para hacer `fastqc` a **todos los archivos** que tengan terminación `.fastq.gz`
 
 ```{bash, eval = F}
 for file in data/*.fastq.gz; do fastqc $file -o quality1; done
 ```
 
-El comando para correr `fastqc` en un solo archivo es:
+El comando para correr `fastqc` en **un solo archivo** es:
 
 ```{bash, eval = F}
 fastqc nombre.fastq.gz -o /directorio/de/salida
@@ -374,13 +351,13 @@ fastqc nombre.fastq.gz -o /directorio/de/salida
 
 ## Analicemos el output de `fastQC`
 
-Veamos la informacion contenida en el [`SRR12363092_1_fastqc.html`](https://eveliacoss.github.io/RNAseq_classFEB2024/Practica_Dia2/FastQC_Reports/SRR12363092_1_fastqc.html).
+Veamos la información contenida en el [`SRR12363092_1_fastqc.html`](https://eveliacoss.github.io/RNAseq_classFEB2024/Practica_Dia2/FastQC_Reports/SRR12363092_1_fastqc.html).
 
 ---
 ## Pausa: Mi carpeta se ve (más o menos) así:
 
 ```{bash, eval = F}
-Clase_RNASeq2024/
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/
 ├── data/
 │   ├── SRR12363092_1.fastq.gz
 │   ├── SRR12363092_2.fastq.gz
@@ -406,10 +383,10 @@ Multiqc reconoce los outputs de `fastqc` por lo que el comando para utilizarlo e
 multiqc quality1
 ```
 
-#### **NOTA: siempre es mejor utilizar direcciones absolutas a relativas, para evitar que tus outputs se guarden en un directorio no deseado: **
+> **NOTA:** siempre es mejor utilizar direcciones absolutas a relativas, para evitar que tus outputs se guarden en un directorio no deseado.
 
 ```{bash, eval = F}
-multiqc /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/quality1/
+multiqc /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/quality1/
 ```
 
 ---
@@ -718,7 +695,7 @@ Ideal para una especie con **genoma de mala calidad o sin referencia**, como **o
 
 ---
 
-# En esta clase utilizaremos el software de alineamiento **STAR**, de tipo alineamiento a **genoma de referencia**
+## En esta clase utilizaremos el software de alineamiento **STAR**, de tipo alineamiento a **genoma de referencia**
 
 #### Seguiremos 2 sencillos pasos
 
@@ -734,15 +711,67 @@ Ideal para una especie con **genoma de mala calidad o sin referencia**, como **o
 
 ---
 
+## Genoma de referencia
+
+- **Genoma de referencia [GRCh38/hg38](https://www.ncbi.nlm.nih.gov/datasets/genome/GCF_000001405.26/) (Dec 2013) (FASTA)** - Proveniente de NCBI
+
+Este archivo deberá estar contenido en la carpeta `reference/`. Puedes usar el genoma de referencia contenido en el clúster con ayuda de un symlink.
+
+```{bash, eval=FALSE}
+ln -s /mnt/Archives/genome/human/GRCh38/UCSC/chromosomes/hg38.fa .
+```
+
+> Es mejor crear **enlaces simbólicos (symlinks)** en vez de copiar cada archivo, ya que permite ahorrar mucho espacio en el disco al evitar la multiplicación de copias fisicas en el disco duro del mismo archivo.
+
+---
+
 ## ¿Qué es un archivo de anotación?
 
-- Un **archivo de anotación GFF** (General Feature File) es un formato de archivo estándar utilizado en bioinformática para almacenar y representar información genómica y de anotación para diversas características dentro de un *genoma*, como **genes, transcritos, exones y otros elementos genómicos**.
+Un archivo de anotación [**GFF**](https://genome.ucsc.edu/FAQ/FAQformat.html#format3) (General Feature File) o [**GTF**](https://genome.ucsc.edu/FAQ/FAQformat.html#format4) (Gene Transfer Format) es un formato de archivo estándar utilizado en bioinformática para almacenar y representar información genómica y de anotación para diversas características dentro de un *genoma*, como **genes, transcritos, exones y otros elementos genómicos**.
 
-**Utilizamos estos archivos junto al genoma de referencia para poder encontrar ubicaciones de genes, transcritos, etc.**
+.pull-left[
+Utilizaremos el Archivo de anotación de **GENCODEv47** junto con el genoma de referencia para poder encontrar las ubicaciones de genes, transcritos, etc.
 
-- Los archivos GFF pueden venir en diferentes versiones, siendo GFF3 uno de los formatos más utilizados.
+- **Archivo de anotación (GTF)** - Proveniente de [GENCODE release v47](https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/gencode.v47.annotation.gtf.gz)
 
-Podemos encontrar estos archivos en bases de datos genómicas como GENCODE para humanos y ratones [aquí](www.gencodegenes.org)
+Podemos encontrar estos archivos en bases de datos genómicas como GENCODE para humanos y ratones [aquí](www.gencodegenes.org).
+]
+
+.pull-right[
+```{r, echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics("figures/gencodegenes-logo.png")
+```
+]
+
+---
+
+### GENCODE Release 47: Genes y Transcritos
+
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/geneCodev47.jpg")
+```
+
+.left[.footnote[.black[
+Imagen proveniente de [NCBI](https://www.gencodegenes.org/human/stats_47.html)
+]]]
+
+---
+
+## Pausa: Hasta este punto debemos de contar con los siguientes archivos
+
+```{bash, eval = F}
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/
+├── data/
+│   ├── SRR12363092_1.fastq.gz
+│   ├── SRR12363092_2.fastq.gz
+│   ├── SRR12363093_1.fastq.gz
+│   ├── SRR12363093_2.fastq.gz
+...
+├── reference/
+│   ├── hg38.fa # symlink
+│   ├── gencode.v47.annotation.gtf.gz # Archivo de anotacion
+...
+```
 
 ---
 
@@ -831,9 +860,9 @@ Todos los scripts usados en esta clase están en el [GitHub](https://github.com/
 
 ```{bash, eval = F}
 Equipo1
-├── annotation    # Archivo de anotacion del organismo (GFF)
+├── annotation    # Archivo de anotacion del organismo (GFF o GTF)
 ├── data          # raw Data
-├── genome        # Genoma de Referencia o symlink del genoma de referencia (opcional)
+├── reference     # Genoma de Referencia o symlink del genoma de referencia (opcional)
 ├── metadata.csv  # Metadata
 ├── quality1      # FastQC y multiQC de raw Data
 ├── quality2      # FastQC y multiQC de los datos despues del Trimming
@@ -842,7 +871,7 @@ Equipo1
 ├── STAR_index    # Index del genoma de referencia
 ├── STAR_output   # Salida de STAR, cuentas y BAM
 ├── TRIM_results  # Salida del Trimming
-└── TruSeq3-PE-2.fa #Adaptadores PE de Illumina
+└── TruSeq3-PE-2.fa # Adaptadores PE de Illumina
 
 ```
 
@@ -851,17 +880,23 @@ Equipo1
 class: inverse, center, middle
 
 `r fontawesome::fa("feather", height = "3em")`
-## Recordatorio: Tarea para el **Jueves 29 de Feb**
-### Elegir en equipos los transcriptomas que emplearán en su proyecto.
+## Tarea para el **Martes 4 de marzo**
+### Reporte de calidad de las secuencias crudas.
 
-Deben entregarme un documento con la **Descripción de los datos** por equipo al correo ecoss@liigh.unam.mx.
+**Subir en la tarea en Google Classroom**
+
+---
+
+
+
+
 
 ---
 
 class: center, middle
 
 `r fontawesome::fa("code", height = "3em")`
-# Jueves 29 de febrero 2024  
+# Martes 4 de marzo 2025  
 ## Importar datos en R, Normalización y Corrección por batch
 ## DEG con DESeq2
 

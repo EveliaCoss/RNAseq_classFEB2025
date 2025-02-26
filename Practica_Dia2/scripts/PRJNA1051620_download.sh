@@ -1,29 +1,3 @@
-#!/bin/bash
-# Use current working directory
-#$ -cwd
-#
-# Join stdout and stderr
-#$ -j y
-#
-# Run job through bash shell
-#$ -S /bin/bash
-#
-#You can edit the scriptsince this line
-#
-# Your job name
-#$ -N sampleData
-#
-# Send an email after the job has finished
-#$ -m e
-#$ -M correo@gmail.com
-#
-# If modules are needed, source modules environment (Do not delete the next line):
-. /etc/profile.d/modules.sh
-#
-# Add any modules you might require:
-# Write your commands in the next line
-cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/data/
-
 wget -nc ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR271/085/SRR27190685/SRR27190685_2.fastq.gz
 wget -nc ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR271/084/SRR27190684/SRR27190684_1.fastq.gz
 wget -nc ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR271/008/SRR27190708/SRR27190708_1.fastq.gz
