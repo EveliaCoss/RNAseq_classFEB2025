@@ -3,7 +3,9 @@
 #$ -cwd
 #
 # Join stdout and stderr
-#$ -j y
+#$ -j n
+#$ -o /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/scripts/out_logs/DownloadData.out
+#$ -e /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/scripts/out_logs/DownloadData.err
 #
 # Run job through bash shell
 #$ -S /bin/bash
@@ -11,11 +13,14 @@
 #You can edit the scriptsince this line
 #
 # Your job name
-#$ -N sampleData
+#$ -N DownloadData
+#
+# Memory
+#$ -l vf=4G
 #
 # Send an email after the job has finished
 #$ -m e
-#$ -M correo@gmail.com
+#$ -M ecossnav@gmail.com
 #
 # If modules are needed, source modules environment (Do not delete the next line):
 . /etc/profile.d/modules.sh

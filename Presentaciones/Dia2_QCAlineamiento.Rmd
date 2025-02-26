@@ -297,6 +297,32 @@ Es necesario tener un solo script donde todos los datos se descargue.
 
 ---
 
+## NO se trabaja en el **nodo principal**
+
+📢 **Regla importante:** ¡No trabajes directamente en el nodo principal del clúster!
+
+🚫 **No ejecutes scripts pesados ni análisis directamente en el nodo de acceso.**
+
+✔️ **Siempre usa el sistema de colas (SGE)** para enviar trabajos o solicita un nodo de prueba si necesitas ejecutar algo interactivo. Usa `qsub` para enviar trabajos.
+
+Si necesitas hacer pruebas o ejecutar código interactivamente, solicita un nodo de prueba con `qlogin` o `qsub -I`.
+
+```{bash, eval=F}
+qlogin # pedir un nodo de prueba, default = 2GB
+qlogin -pe smp 4 -l h_vmem=16G
+```
+
+
+`qlogin`:	Solicita un nodo interactivo en el clúster (para probar código en tiempo real). `-pe smp 4`:	Pide 4 núcleos (CPUs) en el entorno paralelo smp (Shared Memory Processing). `-l h_vmem=16G`:	Asigna 16 GB de memoria RAM por núcleo (en total, 4 × 16 GB = 64 GB de RAM para el trabajo).
+
+Para salir del nodo interactivo, usa:
+
+```{bash, eval=F}
+exit
+```
+
+---
+
 class: inverse, center, middle
 
 `r fontawesome::fa("laptop-code", height = "3em")`
@@ -323,19 +349,20 @@ Para más información visita la pagina https://multiqc.info/docs/getting_starte
 
 ### Correr `fastqc`
 
-En mi caso, debo de cargar el módulo de `fastqc` primero para poder utilizar los comandos. Si estás trabajando en tu computadora local y ya está instalado `fastqc`, tal vez esto no sea necesario.
-
-También creamos una carpeta para los outputs de `fastqc`
+Vamos a analizar el contenido del script `qc1.sge`:
 
 ```{bash, eval = F}
-qlogin # pedir un nodo de prueba, default = 2GB
+# Add any modules you might require:
+#
 module load fastqc/0.11.3
 module load multiqc/1.5
-cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/
-mkdir quality1
+#
+# Write your commands in the next line
+# FastQC analysis
+for file in /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/data/*.fastq.gz; do fastqc $file -o /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/quality1; done
 ```
 
-Después, usaremos un `for loop` para hacer `fastqc` a **todos los archivos** que tengan terminación `.fastq.gz`
+Para analizar  **todos los archivos** que tengan terminación `.fastq.gz` podemos emplear un `for loop`:
 
 ```{bash, eval = F}
 for file in data/*.fastq.gz; do fastqc $file -o quality1; done
@@ -351,7 +378,7 @@ fastqc nombre.fastq.gz -o /directorio/de/salida
 
 ## Analicemos el output de `fastQC`
 
-Veamos la información contenida en el [`SRR12363092_1_fastqc.html`](https://eveliacoss.github.io/RNAseq_classFEB2024/Practica_Dia2/FastQC_Reports/SRR12363092_1_fastqc.html).
+Veamos la información contenida en el [`SRR12363092_1_fastqc.html`](https://eveliacoss.github.io/RNAseq_classFEB2025/Practica_Dia2/FastQC_Reports/SRR12363092_1_fastqc.html).
 
 ---
 ## Pausa: Mi carpeta se ve (más o menos) así:
@@ -375,12 +402,14 @@ Veamos la información contenida en el [`SRR12363092_1_fastqc.html`](https://eve
 Mira [aquí](https://github.com/EveliaCoss/RNASeq_Workshop_Nov2023/blob/main/Dia2_Alineamiento/out_logs/qc1.o369176) cómo se ve la ejecución de este comando.
 
 ---
+
 ### Correr `multiqc`
 
 Multiqc reconoce los outputs de `fastqc` por lo que el comando para utilizarlo es muy sencillo
 
 ```{bash, eval = F}
-multiqc quality1
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/quality1
+multiqc .
 ```
 
 > **NOTA:** siempre es mejor utilizar direcciones absolutas a relativas, para evitar que tus outputs se guarden en un directorio no deseado.
@@ -393,12 +422,11 @@ multiqc /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/quality1/
 
 ## Script y ejecución en el cluster
 
-Si desean ver como se analizaron los datos empleando los programas `FastQC` y `multiQC` dentro del cluster DNA, les dejo los siguientes scripts:
+Si desean ver como se analizaron los datos empleando los programas `FastQC` y `multiQC` dentro del cluster DNA, les dejo el siguiente script:
 
-  - [`qc1.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2024/edit/main/Practica_Dia2/scripts/qc1.sh) 
-  - [`qc1.sge`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/qc1.sge)
+  - [`qc1.sge`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/qc1.sge)
 
-Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/out_logs/qc1.o369176) la salida del programa.
+Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/out_logs/qc1.o369176) la salida del programa.
 
 ---
 
@@ -450,7 +478,7 @@ Usamos un `for loop` para hacer trimmomatic a cada par de lecturas `SRRxxxxx_1.f
 
 ```{bash, eval = F}
 module load trimmomatic/0.33
-cd /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/data
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/data
 for i in *_1.fastq.gz;
 do echo
 trimmomatic PE -threads 8 -phred33 $i "${i%_1.fastq.gz}_2.fastq.gz" \
@@ -483,7 +511,7 @@ done
 - requiredQuality: specifies the average quality required.
 
 ```{bash, eval= F}
-ILLUMINACLIP:/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
+ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
 ```
 
 ---
@@ -503,7 +531,7 @@ Remove low quality bases from the end.
 quality: Specifies the minimum quality required to keep a base
 
 ```{bash, eval= F}
-ILLUMINACLIP:/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
+ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
 ```
 
 Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/out_logs/trim.o369193) cómo se ve la ejecución de este comando.
@@ -742,6 +770,14 @@ Podemos encontrar estos archivos en bases de datos genómicas como GENCODE para 
 knitr::include_graphics("figures/gencodegenes-logo.png")
 ```
 ]
+
+Pide un nodo de prueba, descarga el archivo de anotación de tu especie y descomprime el archivo. Este ejemplo es para *Homo sapiens*:
+
+```{bash, eval=F}
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/
+wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/gencode.v47.annotation.gtf.gz
+gunzip  /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/gencode.v47.annotation.gtf.gz
+```
 
 ---
 

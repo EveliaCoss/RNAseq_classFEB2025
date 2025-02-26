@@ -27,4 +27,8 @@ module load fastqc/0.11.3
 module load multiqc/1.5
 #
 # Write your commands in the next line
-./qc1.sh
+# FastQC analysis
+for file in /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/data/*.fastq.gz; do fastqc $file -o /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/quality1; done
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/quality1
+# multiQC analysis
+multiqc .
