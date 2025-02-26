@@ -42,7 +42,7 @@ data <- data.frame(
     '6', 
     '3 réplicas biológicas por condición (SLE_R y SLE_NR)', 
     'DNBSEQ-G400 platform', 
-    '27 M seq', 
+    '33 M seq a 66 M seq', 
     '150 bp', 
     '[Kavita, *et al*. 2024. Impaired innate and adaptive immune responses to BNT162b2 SARS-CoV-2 vaccination in systemic lupus erythematosus. *JCIinsight*](https://insight.jci.org/articles/view/176556)'
   )
@@ -82,12 +82,35 @@ DT::datatable(
 
 ```
 
-Los datos se pueden descargar desde [NCBI](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE183266) o usando [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJNA759864).
+Los datos se pueden descargar usando [ENA](https://www.ebi.ac.uk/ena/browser/view/PRJNA1051620).
 
 
-## Calidad de las secuencias
+## Calidad de las secuencias de los datos crudos
 
+> NOTA: Las siguientes figuras son solo representaciones, no son los resultados de este estudio.
 
+Se analizó la calidad de las secuencias en los datos crudos, obteniendo un contenido de GC de aproximadamente 50% y una profundidad de lectura en un rango de 33 M a 66 M secuencias.
 
+Las muestras presentan una calidad óptima, con valores dentro de la zona verde y un puntaje Phred superior a 30. Del mismo modo, las muestras mostraron un promedio de calidad con un pico máximo en Phred 35.
 
+```{r, echo=FALSE, out.width='45%', fig.align='center', fig.show='hold', fig.cap="Calidad de las secuencias en muestras SLE y controles"}
+knitr::include_graphics("Presentaciones/figures/SLE_fastqc.png")
+knitr::include_graphics("Presentaciones/figures/SLE_fastqc2.png")
+```
 
+Se identificaron varios picos en el %GC lo cual puede relacionarse con contaminacion en las muestras.
+
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.cap="Variaciones en el porcentaje de %GC en las muestras"}
+knitr::include_graphics("Presentaciones/figures/SLE_fastqc3.png")
+```
+
+Se identificaron secuencias duplicadas, posiblemente relacionadas con la presencia de dimeros de adaptadores.
+
+```{r, echo=FALSE, out.width='45%', fig.align='center', fig.show='hold', fig.cap="Calidad de las secuencias en muestras SLE"}
+knitr::include_graphics("Presentaciones/figures/SLE_fastqc4.png")
+knitr::include_graphics("Presentaciones/figures/SLE_fastqc5.png")
+```
+
+## Conclusión
+
+Los resultados del análisis de calidad muestran que los datos son adecuados para continuar con el procesamiento y análisis posterior. Las secuencias tienen una buena calidad general, con valores de Phred superiores a 30 y un contenido de GC apropiado. Aunque se observa presencia de contaminación, esta será eliminada después del alineamiento. Solo es necesario eliminar las secuencias de rRNA y los adaptadores para optimizar la limpieza de los datos antes de proceder con el análisis final.

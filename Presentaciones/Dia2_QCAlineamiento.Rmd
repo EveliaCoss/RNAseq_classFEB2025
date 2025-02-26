@@ -432,7 +432,7 @@ Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practic
 
 ## Analicemos el output de `multiqc`
 
-Veamos la informacion contenida en el [`multiqc_report.html`](https://eveliacoss.github.io/RNAseq_classFEB2024/Practica_Dia2/FastQC_Reports/multiqc_report.html).
+Veamos la informacion contenida en el [`multiqc_report.html`](https://eveliacoss.github.io/RNAseq_classFEB2025/Practica_Dia2/FastQC_Reports/multiqc_report.html).
 
 ---
 
@@ -452,17 +452,17 @@ Para hacer **trimming** de las lecturas que no tuvieron una buena calidad, utili
 **Para paired-end necesitamos:**
 
 - Las dos lecturas paired end por muestra: `SRRxxxxx_1.fastq.gz` y `SRRxxxx_2.fastq.gz`
-
 - Un archivo con los adaptadores que vamos a cortar: `TruSeq3-PE-2.fa`
 
 Descarga los adaptadores de [aquí](https://github.com/timflutre/trimmomatic/blob/master/adapters/TruSeq3-PE-2.fa)
 
 ```{bash, eval = F}
+cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025
+# Paired-end
 wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-PE-2.fa
+# single-end
+wget https://raw.githubusercontent.com/timflutre/trimmomatic/master/adapters/TruSeq3-SE.fa
 ```
-
-
-Trimmomatic nos dará 4 outputs: Las secuencias que quedaron sin par que eran originalmente del archivo "1": `_1_unpaired.fastq.gz`, las secuencias sin par que eran del archivo "2": `_2_unpaired.fastq.gz` y las secuencias que aun están pareadas: `_1_trimmed.fastq.gz` y `_2_trimmed.fastq.gz`.
 
 ---
 
@@ -482,75 +482,92 @@ cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/data
 for i in *_1.fastq.gz;
 do echo
 trimmomatic PE -threads 8 -phred33 $i "${i%_1.fastq.gz}_2.fastq.gz" \
-/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/"${i%_1.fastq.gz}_1_trimmed.fq.gz" \
-/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/"${i%_1.fastq.gz}_1_unpaired.fq.gz" \
-/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/"${i%_1.fastq.gz}_2_trimmed.fq.gz" \
-/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/"${i%_1.fastq.gz}_2_unpaired.fq.gz" \
-ILLUMINACLIP:/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80 \
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/"${i%_1.fastq.gz}_1_trimmed.fq.gz" \
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/"${i%_1.fastq.gz}_1_unpaired.fq.gz" \
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/"${i%_1.fastq.gz}_2_trimmed.fq.gz" \
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/"${i%_1.fastq.gz}_2_unpaired.fq.gz" \
+ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80 \
 
 done
 ```
 
 ---
+### Trimmomatic
+## Salida
 
-# Documentación de las opciones
-
-`ILLUMINACLIP:<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>`
-
-- seedMismatches: specifies the maximum mismatch count which will still allow a full match to be performed
-
-- palindromeClipThreshold: specifies how accurate the match between the two 'adapter ligated' reads must be for PE palindrome read alignment.
-
-- simpleClipThreshold: specifies how accurate the match between any adapter sequence must be against a read.
-
-
-`SLIDINGWINDOW:<windowSize>:<requiredQuality>`
-
-- windowSize: specifies the number of bases to average across
-
-- requiredQuality: specifies the average quality required.
-
-```{bash, eval= F}
-ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
-```
+Trimmomatic nos dará 4 outputs: Las secuencias que quedaron sin par que eran originalmente del archivo "1": `_1_unpaired.fastq.gz`, las secuencias sin par que eran del archivo "2": `_2_unpaired.fastq.gz` y las secuencias que aun están pareadas: `_1_trimmed.fastq.gz` y `_2_trimmed.fastq.gz`.
 
 ---
 
-# Documentación de las opciones
-
-`LEADING:<quality>`
-
-Remove low quality bases from the beginning
-
-quality: Specifies the minimum quality required to keep a base.
-
-`TRAILING:<quality>`
-
-Remove low quality bases from the end.
-
-quality: Specifies the minimum quality required to keep a base
+### Trimmomatic
+## Documentación de las opciones
 
 ```{bash, eval= F}
 ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
 ```
 
-Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/out_logs/trim.o369193) cómo se ve la ejecución de este comando.
+ILLUMINACLIP:`<fastaWithAdaptersEtc>:<seed mismatches>:<palindrome clip threshold>:<simple clip threshold>`
+
+- Recorta adaptadores de las lecturas usando el archivo de secuencias de adaptadores especificado.
+- `fastaWithAdaptersEtc`: Archivo de adaptadores
+- `seed mismatches`: número máximo de desajustes permitidos entre la secuencia de adaptador y la lectura.
+- `palindrome clip threshold`: umbral para considerar una coincidencia con el adaptador.
+- `simple clip threshold`: tamaño de la ventana para evaluar coincidencias con adaptadores.
+
+LEADING:`<quality>`
+
+- Recorta bases al inicio de la lectura si tienen una calidad menor al valor especificado.
+- `quality`: Calidad minima requerida para retener la base.
+
+---
+
+### Trimmomatic
+## Documentación de las opciones
+
+```{bash, eval= F}
+ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
+```
+
+TRAILING:`<quality>`
+
+- Recorta bases al final de la lectura si tienen una calidad menor al valor especificado.
+- `quality`: Calidad minima requerida para retener la base.
+
+SLIDINGWINDOW:`<windowSize>:<requiredQuality>`
+
+- Escanea la lectura con una ventana deslizante de <tamaño_ventana> bases.
+- Si el promedio de calidad dentro de la ventana es menor que <calidad>, recorta la lectura desde ese punto.
+- `windowSize`: especifica el número de bases que hay que promediar
+- `requiredQuality`: especifica la calidad media exigida.
+
+---
+
+### Trimmomatic
+## Documentación de las opciones
+
+```{bash, eval= F}
+ILLUMINACLIP:/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TruSeq3-PE-2.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:20 MINLEN:80
+```
+
+MINLEN: `MINLEN:<longitud>`
+- Descarta lecturas con una longitud menor al valor especificado después del recorte.
+
+Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/out_logs/trim.o369193) cómo se ve la ejecución de este comando.
 
 ---
 
 ## QC del Trimming
-
-### ¿Qué tan buena se encuentra la calidad posterior a la limpieza de adaptadores y secuencias de baja calidad?
+### ¿Qué tan buena es la calidad después de eliminar adaptadores y secuencias de baja calidad?
 
 Corramos `fastqc` y `multiqc` de nuevo
 
 ```{bash, eval = F}
 mkdir quality2
-for file in /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/*.fq.gz; do fastqc $file -o /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/quality2; done
+for file in /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TRIM_results/*.fq.gz; do fastqc $file -o /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/quality2; done
 ```
 
 ```{bash, eval = F}
-multiqc /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/quality2
+multiqc /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/quality2
 ```
 
 ---
@@ -559,15 +576,15 @@ multiqc /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/quality2
 
 Si desean ver como se analizaron los datos empleando los programas `FastQC` y `multiQC` dentro del cluster DNA, les dejo los siguientes scripts:
 
-  - [`qc2.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/qc2.sh) 
-  - [`qc2.sge`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/qc1.sge)
+  - [`qc2.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/qc2.sh) 
+  - [`qc2.sge`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/qc1.sge)
 
 ---
 
 ### Pausa: Mi carpeta se ve (más o menos) así:
 
 ```{bash, eval = F}
-claseSTAR
+/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica
 ├── data
 │   ├── SRR12363092_1.fastq.gz
 ...
@@ -595,9 +612,9 @@ claseSTAR
 
 Veamos la información contenida en los reportes:
 
-- `FastQC` - [SRR12363092_1_trimmed.fq_fastqc.html](https://eveliacoss.github.io/RNAseq_classFEB2024/Practica_Dia2/FastQC_Reports/SRR12363092_1_trimmed.fq_fastqc.html)
+- `FastQC` - [SRR12363092_1_trimmed.fq_fastqc.html](https://eveliacoss.github.io/RNAseq_classFEB2025/Practica_Dia2/FastQC_Reports/SRR12363092_1_trimmed.fq_fastqc.html)
 
-- `multiqc` - [`multiqc_report2.html`](https://eveliacoss.github.io/RNAseq_classFEB2024/Practica_Dia2/FastQC_Reports/multiqc_report2.html).
+- `multiqc` - [`multiqc_report2.html`](https://eveliacoss.github.io/RNAseq_classFEB2025/Practica_Dia2/FastQC_Reports/multiqc_report2.html).
 
 ---
 
@@ -771,12 +788,16 @@ knitr::include_graphics("figures/gencodegenes-logo.png")
 ```
 ]
 
+---
+
+## Descargar el archivo de anotación
+
 Pide un nodo de prueba, descarga el archivo de anotación de tu especie y descomprime el archivo. Este ejemplo es para *Homo sapiens*:
 
 ```{bash, eval=F}
 cd /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/
 wget https://ftp.ebi.ac.uk/pub/databases/gencode/Gencode_human/release_47/gencode.v47.annotation.gtf.gz
-gunzip  /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/gencode.v47.annotation.gtf.gz
+# gunzip  /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/Practica/reference/gencode.v47.annotation.gtf.gz
 ```
 
 ---
@@ -840,9 +861,9 @@ El script para crear el indice es el siguiente:
 ```{bash, eval = F}
 STAR --runThreadN 12 \
 --runMode genomeGenerate \
---genomeDir /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/STAR_index \
---genomeFastaFiles /mnt/Archives/genome/mouse/mm10/UCSC/chromosomes-1-file/mm10.fa \
---sjdbGTFfile /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/annotation/mm10.knownGene.gtf.gz \
+--genomeDir /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/STAR_index \
+--genomeFastaFiles /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/reference/hg38.fa \
+--sjdbGTFfile /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/reference/gencode.v47.annotation.gtf.gz \
 --sjdbOverhang 149
 ```
 
@@ -855,11 +876,11 @@ Entremos al
 
 Si desean ver como se analizaron los datos empleando el programa `STAR` para realizar el *index del genoma* dentro del cluster DNA, les dejo los siguientes scripts:
 
-  - [`STAR_index.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/STAR_index.sh) 
-  - [`index.sge`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/index.sge)
+  - [`STAR_index.sh`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/STAR_index.sh) 
+  - [`index.sge`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/scripts/index.sge)
 
 
-Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/out_logs/index.o369188) cómo se ve la ejecución de este comando.
+Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/out_logs/index.o369188) cómo se ve la ejecución de este comando.
 
 ---
 
@@ -868,27 +889,27 @@ Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practic
 Si revisamos el [Manual de STAR](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf) notarás que hay una opción para **Contar lecturas por genes** (Sección 8). Con la opción de `--quantMode`. De hecho, estas cuentas coinciden con las cuentas que nos daría `htseq-count`
 
 ```{bash, eval = F}
-index=/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/STAR_index
-FILES=/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/*_1_trimmed.fq.gz
+index=/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/STAR_index
+FILES=/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TRIM_results/*_1_trimmed.fq.gz
 for f in $FILES
 do
     base=$(basename $f _1_trimmed.fq.gz)
     echo $base
-    STAR --runThreadN 12 --genomeDir $index --readFilesIn $f /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/TRIM_results/$base"_2_trimmed.fq.gz" \
+    STAR --runThreadN 12 --genomeDir $index --readFilesIn $f /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/TRIM_results/$base"_2_trimmed.fq.gz" \
     --outSAMtype BAM SortedByCoordinate \
     --quantMode GeneCounts \
     --readFilesCommand zcat \
-    --outFileNamePrefix /mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/STAR_output/$base
+    --outFileNamePrefix /mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/STAR_output/$base
 done
 ```
 
-Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/out_logs/align.o369662) cómo se ve la ejecución de este comando.
+Mira [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia2/out_logs/align.o369662) cómo se ve la ejecución de este comando.
 
 ---
 
 ### SCRIPTS empleados en la clase
 
-Todos los scripts usados en esta clase están en el [GitHub](https://github.com/EveliaCoss/RNAseq_classFEB2024/tree/main/Practica_Dia2/scripts)
+Todos los scripts usados en esta clase están en el [GitHub](https://github.com/EveliaCoss/RNAseq_classFEB2025/tree/main/Practica_Dia2/scripts)
 
 ---
 
@@ -913,19 +934,45 @@ Equipo1
 
 ---
 
+## RNA-seq Nexflow
+
+Se pueden fusionar múltiples programas en un solo flujo de trabajo utilizando **Nextflow**, una herramienta diseñada para la **orquestación y automatización** de pipelines en bioinformática y otras disciplinas computacionales. 
+
+Además, su compatibilidad con **contenedores** (Docker, Singularity) y **sistemas de gestión de colas** (SGE, SLURM) lo convierte en una solución flexible para proyectos complejos que involucran múltiples herramientas y formatos de datos.
+
+```{r, echo=FALSE, out.width='80%', fig.align='center', fig.pos='top'}
+knitr::include_graphics("figures/rnaseq_nexflow.png")
+```
+
+
+.left[.footnote[.black[
+Imagen proveniente de [nf-core/rnaseq](https://nf-co.re/rnaseq/3.14.0/)
+]]]
+
+---
+
 class: inverse, center, middle
 
 `r fontawesome::fa("feather", height = "3em")`
 ## Tarea para el **Martes 4 de marzo**
-### Reporte de calidad de las secuencias crudas.
+### Reporte de calidad de las secuencias crudas
 
-**Subir en la tarea en Google Classroom**
+**Subir en la tarea de Google Classroom**
 
 ---
 
+### Tarea
+## Cada equipo debe entregarme un documento en formato Rmd y HTML que contenga la siguiente información:
 
+- Descripción de los datos (entregable 1, fecha límite: 25 de febrero).
+- Explicación de las gráficas generadas por MultiQC.
+- Conclusión sobre los datos: 
+    + ¿Son viables para continuar con el análisis? 
+    + ¿Qué pasos deben seguirse para mejorar la calidad de los datos?
 
+Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB2025/Entregable_ejemplo2.html)
 
+**Subir en la tarea de Google Classroom**
 
 ---
 
