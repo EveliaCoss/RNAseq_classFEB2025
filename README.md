@@ -34,7 +34,9 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
     - [Control de calidad de los datos](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#43)
     - [Mis primeros pasos en Bash](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#68)
 - Datos: `/mnt/atgc-d1/bioinfoII/rnaseq/BioProject_2025/`
-- Tarea para el jueves 27 de feb: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 60 y Google Classroom ENES](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#64)
+- Tarea para el **jueves 27 de feb**: Elegir en equipos los transcriptomas que emplearán en su proyecto - [Información diapositiva 60 y Google Classroom ENES](https://eveliacoss.github.io/RNAseq_classFEB2025/Presentaciones/Dia1_AspectosGenerales.html#64)
+
+Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB2025/Entregable_ejemplo1.html)
 
 > Bioproject que usaron anteriormente (NO SE PUEDEN USAR): PRJNA821620 (At), PRJNA256121 (At), PRJNA858106 (Hs), PRJNA826506 (Hs), PRJNA649971 (Mm), PRJNA743296 (Hs), PRJNA739157 (Hs), PRJNA983389 (Hs), PRJNA759864 (Hs).
 >
@@ -57,6 +59,17 @@ Se ofrecerán presentaciones detalladas sobre el uso de programas clave, todos d
     - Alineamiento con el genoma de referencia - [STAR](https://github.com/alexdobin/STAR/blob/master/doc/STARmanual.pdf)
     - *Pseudoalineamiento* con [Kallisto](https://pachterlab.github.io/kallisto/manual)
     - [*Pseudoalineamiento* con Kallisto - practica](https://github.com/EveliaCoss/RNAseq_classFEB2023/tree/main/RNA_seq#practica2)
+
+- Tarea para el **martes 4 de marzo**: 
+    + Descripción de los datos (entregable 1, fecha límite: 25 de febrero).
+    + Explicación de las gráficas generadas por MultiQC.
+    + Conclusión sobre los datos: 
+      - ¿Son viables para continuar con el análisis? 
+      - ¿Qué pasos deben seguirse para mejorar la calidad de los datos?
+
+Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB2025/Entregable_ejemplo2.html)
+
+**Subir en la tarea de Google Classroom**
 
 ### Dia 3. Importar datos en R, Normalización y Corrección por batch effect 🪲 / DEG con DESeq2
 
