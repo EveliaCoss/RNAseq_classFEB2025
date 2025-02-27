@@ -2,7 +2,7 @@
 title: "Workshop: Análisis de datos de RNA-Seq"
 subtitle: "⚔<br/>Importar datos en R, Normalización y Corrección por batch / DEG con DESeq2"  
 author: "Dra. Evelia Coss, Sofia Salazar y Diego Ramirez"
-date: "29/02/2024"
+date: "04/03/2025"
 output:
   xaringan::moon_reader:
     css: 
@@ -130,22 +130,18 @@ background-size: 1210px,210px, cover
 
 ---
 
-class: inverse, center, middle
-
-`r fontawesome::fa("file-lines", height = "3em")`
 # Contenido de la clase
 
----
 
-### 1. Fuentes de error
+- 1) Fuentes de error
 
-### 2. Importar datos de STAR a R
+- 2) Importar datos de STAR a R
 
-### 3. Normalización de los datos
+- 3) Normalización de los datos
 
-### 4. Detección y corrección por batch effect
+- 4) Detección y corrección por batch effect
 
-### 5. DEG con DESeq2
+- 5) DEG con DESeq2
 
 ---
 
@@ -169,55 +165,43 @@ Todas las plataformas tienen cierto de nivel de error que se debe tomar en cuent
 ---
 # Errores en preparación de la **muestra**
 
-- Error del usuario (e.g. etiquetar equivocadamente una muestra).
-
-- Degradación de ADN/ARN por métodos de preservación.
-
-- Contaminación con secuencias externas.
-
-- Baja cantidad de ADN de inicio.
+- **Errores del usuario:** Etiquetado incorrecto de la muestra.
+- **Degradación de ADN/ARN:** Causada por métodos inadecuados de preservación o manipulación.
+- **Contaminación con secuencias externas:** Introducción de material genético ajeno a la muestra.
+- **Baja cantidad de ADN/ARN de inicio:** Insuficiente material genético para una preparación adecuada de la biblioteca.
 
 ---
+
 # Errores en preparación de las **bibliotecas**
 
-- Error del usuario (e.g. contaminar una muestra con otra, contaminar con reacciones previas, errores en el protocolo)
-
-- Errores de amplificación por PCR
-
-- Sesgo por (cebadores) primers (sesgo de unión, sesgo por metilación, dímeros de cebadores [primer dimers] )
-
-- Sesgo por captura (Poly-A, Ribozero)
-
-- Errores de máquina (configuración errónea, interrupción de la reacción)
-
-- Quimeras
-
-- Errores de índice, adaptador (contaminación de adaptadores, falta de diversidad de índices, códigos (barcodes) incompatibles, sobrecargo)
+- **Errores del usuario:** Contaminación entre muestras, contaminación con productos de reacciones previas, fallos en la ejecución del protocolo.
+- **Errores de amplificación por PCR:** Introducción de artefactos debido a amplificación ineficiente o excesiva.
+- **Sesgo por cebadores (primers):** Incluye sesgo de unión, sesgo por metilación y formación de dímeros de cebadores.
+- **Sesgo por captura:** Derivado del uso de estrategias como Poly-A o Ribozero.
+- **Errores de la máquina:** Configuración incorrecta del equipo o interrupción de la reacción.
+- **Quimeras:** Artefactos generados por recombinación errónea de secuencias durante la amplificación.
+- **Errores en índices y adaptadores:** Contaminación con adaptadores, baja diversidad de índices, códigos de barras (barcodes) incompatibles o sobrecarga de muestras.
 
 ---
 
 # Errores de **secuenciación**
 
-- Error del usuario (e.g. sobrecarga de la celda)
-
-- Desfase (e.g. extensión incompleta, adición de múltiples nucleótidos)
-
-- Fluoróforos muertos, nucleótidos dañados y señales superpuestas
-
-- Contexto de la secuencia (e.g. alto contenido de GC, secuencias homologas y de baja complejidad, homopolímeros).
-
-- Errores de máquina (e.g. laser, disco duro, programas)
-
-- Sesgos de cadena
+- **Errores del usuario:** Sobrecarga de la celda de secuenciación.
+- **Desfase:** Extensión incompleta de la cadena o incorporación de múltiples nucleótidos en un solo ciclo.
+- **Problemas con fluoróforos y nucleótidos:** Fluoróforos muertos, nucleótidos dañados o señales superpuestas que afectan la lectura.
+- **Efecto del contexto de la secuencia:** Errores inducidos por alto contenido de GC, secuencias homólogas o de baja complejidad, y presencia de homopolímeros.
+- **Errores de la máquina:** Fallos en componentes como láser, disco duro o software.
+- **Sesgos de cadena:** Preferencia en la secuenciación de una de las hebras del ADN.
 
 ---
-# El reto - diferenciar **señales biológicas de ruido/errores**
 
-- Controles **negativos y positivos** - ¿Qué espero?
+# El reto: Diferenciación entre señales **biológicas y ruido/errores**
 
-- **Réplicas técnicas y biológicas** - ayudan a determinar la tasa de ruido
+- **Controles positivos y negativos:** Definir expectativas claras para identificar desviaciones inesperadas. ¿Qué espero?
 
-- Conocer los tipos de errores comunes en determinada plataforma. 
+- **Réplicas técnicas y biológicas**: Permiten estimar la tasa de ruido y evaluar la reproducibilidad de los datos.
+
+- **Conocimiento de errores específicos de la plataforma:** Identificar patrones de error característicos de la tecnología utilizada para minimizar su impacto en el análisis.
 
 ---
 
@@ -271,11 +255,11 @@ Para salir escribe `q`.
 
 - **column 1:** gene ID
 
-- **column 2:** counts for unstranded RNA-seq
+- **column 2:** Conteos para RNA-seq sin orientación (unstranded). 
 
-- **column 3:** counts for the 1st read strand aligned with RNA (htseq-count option -s yes)
+- **column 3:** Conteos para la primera hebra alineada con el RNA (`htseq-count opción -s yes`)
 
-- **column 4:** counts for the 2nd read strand aligned with RNA (htseq-count option -s reverse)
+- **column 4:** Conteos para la segunda hebra alineada con el RNA (`htseq-count opción -s reverse`)
 
 ]
 
@@ -287,11 +271,12 @@ Para salir escribe `q`.
 
 ---
 
-## Nodo de prueba en el cluster DNA
+## Actividad
+#### Iniciar una sesión interactiva en el clúster y abrir R
 
-Primero cargamos a pedir un **nodo de prueba** en el cluster con `qlogin`. Default = 2GB de RAM.
-
-Posteriormente, cargaremos el modulo de R v4.0.2.
+- 1) Solicitar un **nodo interactivo** con `qlogin` (por defecto, asigna 2GB de RAM)
+- 2) Cargar el módulo de R versión 4.0.2
+- 3) Iniciar R
 
 ```{bash, eval = F}
 qlogin
@@ -308,10 +293,10 @@ R
 3. Crear el archivo `dds` con `DESeq2`
 4. Correr el análisis de Expresión Diferencial de los Genes (DEG)
 5. Normalización de los datos
-6. Detección de batch effect
+6. Detección de *batch effect*
 7. Obtener los resultados de los contraste de DEG
 8. Visualización de los datos
-9. Análisis de Terminos funcionales (GO terms)
+9. Análisis de términos funcionales (GO terms)
 
 ---
 
@@ -331,7 +316,7 @@ R
 
 - Script [`GOterms_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia4/scripts/GOterms_analysis.R):
 
-  **9)** Análisis de Terminos funcionales (GO terms)
+  **9)** Análisis de términos funcionales (GO terms)
 
 ---
 
