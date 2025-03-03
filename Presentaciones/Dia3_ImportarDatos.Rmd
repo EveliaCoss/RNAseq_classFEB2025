@@ -268,22 +268,6 @@ Para salir escribe `q`.
 <img src="figures/out_counts.png", height = "400">
 ]
 
-
----
-
-## Actividad
-#### Iniciar una sesión interactiva en el clúster y abrir R
-
-- 1) Solicitar un **nodo interactivo** con `qlogin` (por defecto, asigna 2GB de RAM)
-- 2) Cargar el módulo de R versión 4.0.2
-- 3) Iniciar R
-
-```{bash, eval = F}
-qlogin
-module load r/4.0.2
-R
-```
-
 ---
 
 ## Pasos a seguir para el análisis de los datos de **RNA-Seq**
@@ -302,13 +286,15 @@ R
 
 ## Pasos a seguir para el análisis de los datos de **RNA-Seq**
 
+> Especie: *Mus musculus*, Alineamiento: STAR, Conteo: STAR.
+
 - Script [`load_data_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/load_data_inR.R):
 
-  **1)** Importar datos en R (archivo de cuentas) + metadatos y **2)** Crear una matriz de cuentas con todos los transcriptomas
+  **1)** Importar datos en R (archivo de cuentas) + metadatos y **2)** Crear una matriz de cuentas con todos los transcriptomas. 
 
 - Script [`DEG_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/DEG_analysis.R):
 
-  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG
+  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. Input: [raw_counts.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv) y  [metadata.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/metadata.csv)
 
 - Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
 
@@ -320,27 +306,63 @@ R
 
 ---
 
+## Pasos a seguir para el análisis de los datos de **RNA-Seq**
+
+> Especie: *Homo sapiens*, Alineamiento: STAR, Conteo: STAR.
+
+- Script [`import_txi_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/import_txi_inR.R):
+
+  **1)** Importar datos en R (archivo de cuentas) + metadatos y **2)** Crear una matriz de cuentas con todos los transcriptomas. 
+
+- Script [`DEG_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/DEG_analysis.R):
+
+  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. Input: [raw_counts.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv) y  [metadata.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/metadata.csv)
+
+- Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
+
+  **8)** Visualización de los datos
+
+- Script [`GOterms_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia4/scripts/GOterms_analysis.R):
+
+  **9)** Análisis de términos funcionales (GO terms)
+
+---
+
+## Actividad
+#### Iniciar una sesión interactiva en el clúster y abrir R
+
+- 1) Solicitar un **nodo interactivo** con `qlogin` (por defecto, asigna 2GB de RAM)
+- 2) Cargar el módulo de R versión 4.0.2
+- 3) Iniciar R
+
+```{bash, eval = F}
+qlogin
+module load r/4.0.2
+R
+```
+
+Para esta clase usaremos los datos de *Homo sapiens* 
+
+---
+
 ### Paso 1. Importar los archivos de cuentas a R
 
 Emplearemos el script [`load_data_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/load_data_inR.R) para correr el siguiente análisis. 
 
-**Las siguientes lineas de commandos, están en lenguaje de R**
-
-```{r, eval = F}
-indir <- "/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/STAR_output/"
-outdir <- "/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/results/"
-setwd(indir)
-files <- dir(pattern = "ReadsPerGene.out.tab")
-```
-
 Exploremos los datos
 
 ```{r, eval = F}
-files
-# [1] "SRR12363092_ReadsPerGene.out.tab" "SRR12363093_ReadsPerGene.out.tab"
-# [3] "SRR12363095_ReadsPerGene.out.tab" "SRR12363096_ReadsPerGene.out.tab"
-# [5] "SRR12363098_ReadsPerGene.out.tab" "SRR12363099_ReadsPerGene.out.tab"
-# [7] "SRR12363101_ReadsPerGene.out.tab" "SRR12363102_ReadsPerGene.out.tab"
+# Cargar todos los archivos de cuentas obtenidos de Salmon
+files <- c()
+
+for (sample in samples) {
+  sub_dir <- file.path(filedir, sample)
+  files_in_sample <- list.files(path = sub_dir, pattern = "quant.sf$", full.names = TRUE, recursive = TRUE)
+  files <- c(files, files_in_sample)
+}
+# Numero de transcriptomas
+length(files)
+# [1] 165
 ```
 
 ---
@@ -793,7 +815,7 @@ Ejemplo de Bonita documentación de codigo da click [aqui](https://github.com/md
 class: center, middle
 
 `r fontawesome::fa("code", height = "3em")`
-# Viernes 1 de marzo 2024  
+# Jueves 6 de marzo 2024  
 ## GSEA - Análisis funcional
 
 Gracias por tu atención, respira y coméntame tus dudas. 
