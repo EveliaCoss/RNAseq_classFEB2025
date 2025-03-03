@@ -166,8 +166,11 @@ Todas las plataformas tienen cierto de nivel de error que se debe tomar en cuent
 # Errores en preparación de la **muestra**
 
 - **Errores del usuario:** Etiquetado incorrecto de la muestra.
+
 - **Degradación de ADN/ARN:** Causada por métodos inadecuados de preservación o manipulación.
+
 - **Contaminación con secuencias externas:** Introducción de material genético ajeno a la muestra.
+
 - **Baja cantidad de ADN/ARN de inicio:** Insuficiente material genético para una preparación adecuada de la biblioteca.
 
 ---
@@ -175,11 +178,17 @@ Todas las plataformas tienen cierto de nivel de error que se debe tomar en cuent
 # Errores en preparación de las **bibliotecas**
 
 - **Errores del usuario:** Contaminación entre muestras, contaminación con productos de reacciones previas, fallos en la ejecución del protocolo.
+
 - **Errores de amplificación por PCR:** Introducción de artefactos debido a amplificación ineficiente o excesiva.
+
 - **Sesgo por cebadores (primers):** Incluye sesgo de unión, sesgo por metilación y formación de dímeros de cebadores.
+
 - **Sesgo por captura:** Derivado del uso de estrategias como Poly-A o Ribozero.
+
 - **Errores de la máquina:** Configuración incorrecta del equipo o interrupción de la reacción.
+
 - **Quimeras:** Artefactos generados por recombinación errónea de secuencias durante la amplificación.
+
 - **Errores en índices y adaptadores:** Contaminación con adaptadores, baja diversidad de índices, códigos de barras (barcodes) incompatibles o sobrecarga de muestras.
 
 ---
@@ -187,10 +196,15 @@ Todas las plataformas tienen cierto de nivel de error que se debe tomar en cuent
 # Errores de **secuenciación**
 
 - **Errores del usuario:** Sobrecarga de la celda de secuenciación.
+
 - **Desfase:** Extensión incompleta de la cadena o incorporación de múltiples nucleótidos en un solo ciclo.
+
 - **Problemas con fluoróforos y nucleótidos:** Fluoróforos muertos, nucleótidos dañados o señales superpuestas que afectan la lectura.
+
 - **Efecto del contexto de la secuencia:** Errores inducidos por alto contenido de GC, secuencias homólogas o de baja complejidad, y presencia de homopolímeros.
+
 - **Errores de la máquina:** Fallos en componentes como láser, disco duro o software.
+
 - **Sesgos de cadena:** Preferencia en la secuenciación de una de las hebras del ADN.
 
 ---
@@ -254,11 +268,8 @@ Para salir escribe `q`.
 #### Información contenida
 
 - **column 1:** gene ID
-
 - **column 2:** Conteos para RNA-seq sin orientación (unstranded). 
-
 - **column 3:** Conteos para la primera hebra alineada con el RNA (`htseq-count opción -s yes`)
-
 - **column 4:** Conteos para la segunda hebra alineada con el RNA (`htseq-count opción -s reverse`)
 
 ]
@@ -284,9 +295,9 @@ Para salir escribe `q`.
 
 ---
 
-## Pasos a seguir para el análisis de los datos de **RNA-Seq**
+### Pipeline
 
-> Especie: *Mus musculus*, Alineamiento: STAR, Conteo: STAR.
+>  Especie: *Mus musculus*, Alineamiento: STAR, Conteo: STAR
 
 - Script [`load_data_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/load_data_inR.R):
 
@@ -306,9 +317,87 @@ Para salir escribe `q`.
 
 ---
 
-## Pasos a seguir para el análisis de los datos de **RNA-Seq**
+## Datos de pacientes con SLE
 
-> Especie: *Homo sapiens*, Alineamiento: STAR, Conteo: STAR.
+```{r metadata, echo=FALSE}
+# Crear los datos de la tabla
+data <- data.frame(
+  Descripción = c(
+    "Bioproject",
+    "Especie",
+    "Tipo de bibliotecas",
+    "Método de selección",
+    "Número de transcriptomas",
+    "Número de réplicas biológicas",
+    "Secuenciador empleado",
+    "Profundidad de secuenciación de cada transcriptoma",
+    "Tamaño de las lecturas",
+    "Artículo científico"
+  ),
+  Información = c(
+    'Datos generados en el laboratorio', 
+    '*Homo sapiens*', 
+    '*paired-end*', 
+    'Selección por Poly-A', 
+    '33', 
+    '10 controles y 23 pacientes con SLE', 
+    'NovaSeq de Illumina', 
+    '33 M seq a 53 M seq', 
+    '150 bp', 
+    'Por publicar'
+  )
+)
+
+# Mostrar la tabla en formato sencillo
+knitr::kable(data, 
+             caption = "Tabla 1: Características de las muestras")
+```
+
+---
+
+## Numero de transcriptomas
+
+.pull-left[
+Calcula el número total de transcriptomas generados considerando que se obtiene una muestra por paciente (**23 pacientes con SLE y 10 controles**) en las siguientes condiciones:
+
+- **1)** Monocitos en estado basal.
+- **2)** Monocitos diferenciados a moDCs.
+- **3)** Monocitos diferenciados a tolDCs.
+- **4)** Una muestra tras la estimulación con IMQ.
+- **5)** Una muestra sin estimulación con IMQ.
+
+¿Cuántos transcriptomas se obtuvieron en total?
+]
+
+.pull-right[
+```{r, echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("figures/SLE_desing.jpg")
+```
+]
+
+--
+
+**Respuesta:** Tenemos 165 transcriptomas por analizar.
+
+---
+
+## Variables a considerar en el análisis de datos
+
+.pull-left[
+```{r, echo=FALSE, out.width='60%', fig.align='center'}
+knitr::include_graphics("figures/SLE_desing2.jpg")
+```
+]
+
+.pull-right[
+```{r, echo=FALSE, out.width='50%', fig.align='center'}
+knitr::include_graphics("figures/SLE_flow.jpg")
+```
+]
+
+---
+
+### Pipeline a seguir
 
 - Script [`import_txi_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/import_txi_inR.R):
 
@@ -347,12 +436,38 @@ Para esta clase usaremos los datos de *Homo sapiens*
 
 ### Paso 1. Importar los archivos de cuentas a R
 
-Emplearemos el script [`load_data_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/load_data_inR.R) para correr el siguiente análisis. 
+Emplearemos el script [`import_txi_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/import_txi_inR.R) para correr el siguiente análisis. 
 
-Exploremos los datos
+Asi se ven las salidas despues de correr **STAR y Salmon**:
+
+```
+├── QR108_4
+│   ├── aux_info
+│   │   ├── ambig_info.tsv
+│   │   ├── expected_bias.gz
+│   │   ├── fld.gz
+│   │   ├── meta_info.json
+│   │   ├── observed_bias_3p.gz
+│   │   └── observed_bias.gz
+│   ├── cmd_info.json
+│   ├── libParams
+│   │   └── flenDist.txt
+│   ├── logs
+│   │   └── salmon_quant.log
+│   ├── quant.genes.sf
+│   └── quant.sf
+├── QR108_4.sorted.bam
+├── QR108_4.sorted.bam.bai
+```
+
+---
+
+### Paso 1. Importar los archivos de cuentas a R
+
+Cargar todos los archivos de cuentas obtenidos de Salmon
 
 ```{r, eval = F}
-# Cargar todos los archivos de cuentas obtenidos de Salmon
+# Crear un vector vacio
 files <- c()
 
 for (sample in samples) {
