@@ -933,9 +933,11 @@ dds$Internal <- factor(paste(dds$SLEDAI_category, dds$Group, sep="_"))
 Extraer la informacion de controles y luego unir las variables de esta manera
 
 ```{r, eval=F}
+dds$Internal <- factor(paste(dds$Dose_category, dds$Dose_category, dds$SLEDAI_category, sep="_"))
+
 dds <- DESeqDataSetFromTximport(txi = filtered_txi,
                                 colData = metadata,
-                                design = ~ Dose_category + Cell_type + SLEDAI_category)
+                                design = ~ Internal)
 dds
 ```
 
@@ -1004,35 +1006,6 @@ Ejemplo de Bonita documentación de codigo da click [aqui](https://github.com/md
 ¿Tienen acceso rápido y seguro al clúster? ✅🔑
 
 Si la respuesta es no, pueden seguir este [tutorial](https://github.com/EveliaCoss/keygen) para generar sus llaves de acceso de manera sencilla y segura. 🚀
-
----
-
-## Actividad en equipo
-### Creación de un Diagrama de Flujo para el Análisis de RNA-seq
-
-Ahora que hemos explorado las distintas estrategias para el análisis de datos de RNA-seq, trabajen en equipo para diseñar un diagrama de flujo que represente claramente su flujo de trabajo.
-
-Su diagrama debe incluir:
-**1)** Pasos clave del análisis (por ejemplo, control de calidad, alineamiento, cuantificación, normalización, análisis diferencial).
-**2)** Programas o herramientas que utilizarán en cada etapa (como FastQC, STAR, Salmon, DESeq2, EdgeR, etc.).
-**3)** Archivos de entrada y archivos de salida en cada paso (FASTQ, BAM, counts matrices, etc.).
-**4)** Opciones o parámetros importantes, si lo consideran relevante.
-
-💡 Ideas adicionales:
-
-- Utilicen diagramas claros y estructurados con flechas que indiquen el flujo de los datos.
-- Pueden hacerlo en herramientas como draw.io, BioRender, PowerPoint, o incluso a mano si prefieren algo rápido y esquemático.
-- Si hay diferencias en los enfoques de análisis entre los equipos, comparen sus diagramas y discutan las ventajas de cada uno.
-
-📌 Objetivo: Tener una visión clara y estructurada de su flujo de trabajo antes de comenzar el análisis. 🚀
-
----
-
-## Fechas importantes
-
-- Entrega de Reporte final (**28 de marzo 2025**) . [Rubrica](https://docs.google.com/document/d/10eC8KF4MDOT893h5wD0ukbLe9YUEypsa0rdsoixytqs/edit?tab=t.0)
-
-- Clase de retroalimentación (**29 de abril 2025**)
 
 ---
 

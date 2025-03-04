@@ -2130,7 +2130,7 @@ left: 6px;
 })(window, document)
 </script>
     <script id="xaringanExtra-webcam-options" type="application/json">{"width":"200","height":"200","margin":"1em"}</script>
-    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"d3fc0b0be6c94c3082db44b6e69d6f0a","expires":1}</script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x3b0edcc2c5a476db7cd324e5111ad47","expires":1}</script>
     <script>(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.himalaya = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
@@ -4810,9 +4810,11 @@ Extraer la informacion de controles y luego unir las variables de esta manera
 
 
 ``` r
+dds$Internal &lt;- factor(paste(dds$Dose_category, dds$Dose_category, dds$SLEDAI_category, sep=&quot;_&quot;))
+
 dds &lt;- DESeqDataSetFromTximport(txi = filtered_txi,
                                 colData = metadata,
-                                design = ~ Dose_category + Cell_type + SLEDAI_category)
+                                design = ~ Internal)
 dds
 ```
 
@@ -4881,35 +4883,6 @@ Ejemplo de Bonita documentación de codigo da click [aqui](https://github.com/md
 ¿Tienen acceso rápido y seguro al clúster? ✅🔑
 
 Si la respuesta es no, pueden seguir este [tutorial](https://github.com/EveliaCoss/keygen) para generar sus llaves de acceso de manera sencilla y segura. 🚀
-
----
-
-## Actividad en equipo
-### Creación de un Diagrama de Flujo para el Análisis de RNA-seq
-
-Ahora que hemos explorado las distintas estrategias para el análisis de datos de RNA-seq, trabajen en equipo para diseñar un diagrama de flujo que represente claramente su flujo de trabajo.
-
-Su diagrama debe incluir:
-**1)** Pasos clave del análisis (por ejemplo, control de calidad, alineamiento, cuantificación, normalización, análisis diferencial).
-**2)** Programas o herramientas que utilizarán en cada etapa (como FastQC, STAR, Salmon, DESeq2, EdgeR, etc.).
-**3)** Archivos de entrada y archivos de salida en cada paso (FASTQ, BAM, counts matrices, etc.).
-**4)** Opciones o parámetros importantes, si lo consideran relevante.
-
-💡 Ideas adicionales:
-
-- Utilicen diagramas claros y estructurados con flechas que indiquen el flujo de los datos.
-- Pueden hacerlo en herramientas como draw.io, BioRender, PowerPoint, o incluso a mano si prefieren algo rápido y esquemático.
-- Si hay diferencias en los enfoques de análisis entre los equipos, comparen sus diagramas y discutan las ventajas de cada uno.
-
-📌 Objetivo: Tener una visión clara y estructurada de su flujo de trabajo antes de comenzar el análisis. 🚀
-
----
-
-## Fechas importantes
-
-- Entrega de Reporte final (**28 de marzo 2025**) . [Rubrica](https://docs.google.com/document/d/10eC8KF4MDOT893h5wD0ukbLe9YUEypsa0rdsoixytqs/edit?tab=t.0)
-
-- Clase de retroalimentación (**29 de abril 2025**)
 
 ---
 

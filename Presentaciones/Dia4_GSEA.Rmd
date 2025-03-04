@@ -129,6 +129,34 @@ background-size: 1210px,210px, cover
 .left[.footnote[R-Ladies Theme[R-Ladies Theme](https://www.apreshill.com/project/rladies-xaringan/)]]
 
 ---
+## Actividad en equipo
+### Creación de un Diagrama de Flujo para el Análisis de RNA-seq
+
+📌 Objetivo: Tener una visión clara y estructurada de su flujo de trabajo antes de comenzar el análisis. 🚀
+
+Ahora que hemos explorado las distintas estrategias para el análisis de datos de RNA-seq, trabajen en equipo para diseñar un diagrama de flujo que represente claramente su flujo de trabajo.
+
+Su diagrama debe incluir:
+**1)** Pasos clave del análisis (por ejemplo, control de calidad, alineamiento, cuantificación, normalización, análisis diferencial).
+**2)** Programas o herramientas que utilizarán en cada etapa (como FastQC, STAR, Salmon, DESeq2, EdgeR, etc.).
+**3)** Archivos de entrada y archivos de salida en cada paso (FASTQ, BAM, counts matrices, etc.).
+**4)** Opciones o parámetros importantes, si lo consideran relevante.
+
+💡 Ideas adicionales:
+
+- Utilicen diagramas claros y estructurados con flechas que indiquen el flujo de los datos.
+- Pueden hacerlo en herramientas como draw.io, BioRender, PowerPoint, o incluso a mano si prefieren algo rápido y esquemático.
+- Si hay diferencias en los enfoques de análisis entre los equipos, comparen sus diagramas y discutan las ventajas de cada uno.
+
+---
+
+## Fechas importantes
+
+- Entrega de Reporte final (**28 de marzo 2025**) . [Rubrica](https://docs.google.com/document/d/10eC8KF4MDOT893h5wD0ukbLe9YUEypsa0rdsoixytqs/edit?tab=t.0)
+
+- Clase de retroalimentación (**29 de abril 2025**)
+
+---
 
 # Contenido de la clase
 
@@ -366,7 +394,7 @@ class: inverse, center, middle
 
 - Script [`DEG_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/DEG_analysis.R):
 
-  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG
+  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. Input: [raw_counts.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv) y  [metadata.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/metadata.csv)
 
 - Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
 
