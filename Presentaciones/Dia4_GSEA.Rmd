@@ -2,7 +2,7 @@
 title: "Workshop: Análisis de datos de RNA-Seq"
 subtitle: "⚔<br/>GSEA - Análisis funcional"  
 author: "Dra. Evelia Coss, Sofia Salazar y Diego Ramirez"
-date: "01/03/2024"
+date: "06/03/2025"
 output:
   xaringan::moon_reader:
     css: 
@@ -130,18 +130,14 @@ background-size: 1210px,210px, cover
 
 ---
 
-class: inverse, center, middle
-
-`r fontawesome::fa("file-lines", height = "3em")`
 # Contenido de la clase
 
----
 
-### 1. Gene Set Enrichment Analysis (GSEA) - Análisis funcional
+- 1) Gene Set Enrichment Analysis (GSEA) - Análisis funcional
 
-### 2. Ejemplos de graficas
+- 2) Ejemplos de graficas
 
-### 3. Ultima Practica
+- 3) Ultima Practica
 
 ---
 
@@ -386,4 +382,4 @@ class: center, middle
 
 `r fontawesome::fa("code", height = "3em")`
 # Felicidades por terminar el curso
-## Recuerda mandar tu trabajo final en equipo el **22 de marzo**
+## Recuerda mandar tu trabajo final en equipo el **28 de marzo**
