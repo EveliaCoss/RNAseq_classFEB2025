@@ -317,6 +317,16 @@ Para salir escribe `q`.
 
 ---
 
+## Aqui estan los datos de ese ejercicio 
+
+Descarga la matriz de cuentas 
+
+- En formato `.csv` [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv)
+
+- En formato `.RData` [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.RData)
+
+---
+
 ## Datos de pacientes con SLE
 
 ```{r metadata, echo=FALSE}
@@ -405,7 +415,7 @@ knitr::include_graphics("figures/SLE_flow.jpg")
 
 - Script [`DEG_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/DEG_analysis.R):
 
-  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. Input: [raw_counts.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv) y  [metadata.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/metadata.csv)
+  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. 
 
 - Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
 
@@ -414,23 +424,6 @@ knitr::include_graphics("figures/SLE_flow.jpg")
 - Script [`GOterms_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia4/scripts/GOterms_analysis.R):
 
   **9)** Análisis de términos funcionales (GO terms)
-
----
-
-## Actividad
-#### Iniciar una sesión interactiva en el clúster y abrir R
-
-- 1) Solicitar un **nodo interactivo** con `qlogin` (por defecto, asigna 2GB de RAM)
-- 2) Cargar el módulo de R versión 4.0.2
-- 3) Iniciar R
-
-```{bash, eval = F}
-qlogin
-module load r/4.0.2
-R
-```
-
-Para esta clase usaremos los datos de *Homo sapiens* 
 
 ---
 
@@ -482,47 +475,77 @@ length(files)
 
 ---
 
+### Tabla de conversión para `tximport`
+
+Cargar la tabla de conversión ([`salmon_tx2gene.tsv`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/metadata/)):
+
+- **Columna 1:** Identificadores de transcritos
+- **Columna 2:** Identificadores de los genes
+
+
+```{r, eval = F}
+tx2gene <- read.table(paste0(indir, 'salmon_tx2gene.tsv'), sep = '\t')
+colnames(tx2gene) <- c('TXNAME', 'GENEID', 'GENEID2')
+head(tx2gene, 2)
+
+#   TXNAME  GENEID GENEID2
+# 1   rna0 DDX11L1 DDX11L1
+# 2   rna1  WASH7P  WASH7P
+```
+
+---
+
 ### Paso 2. Creamos una matriz de cuentas
 
-Esta matriz tendrá como filas a los genes, y como columnas a las muestras.
+Cuando se usa en R con `tximport`, este archivo permite agrupar las cuantificaciones de transcritos en niveles de genes:
 
-```{r, eval = F}
-seq_along(files)
-# [1] 1 2 3 4 5 6 7 8
+```{r, eval=FALSE}
+txi <- tximport(files, type = "salmon", tx2gene = tx2gene)
+names(txi)
 ```
 
-### Paso 3. Leer cada tabla de cuentas y extraer la segunda columna
+📌 Importante:
+
+- Asegúrate de que los identificadores en `tx2gene` coincidan con los usados en los archivos de cuantificación (salmon, kallisto, etc.) (checa el archivo de anotación).
+- `tx2gene` se usa para resumir la expresión a nivel de genes, en lugar de quedarse con la expresión de transcritos individuales.
+
+---
+
+### Paso 3. Eliminar transcritos ribosomales
+
+El archivo `Ensembldb.RData` contiene la base de datos de Ensembl, el codigo se encuentra en [Ensembl_database.R](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/Ensembl_database.R).
 
 ```{r, eval = F}
-counts <- c() # esta sera la matriz
-for(i in seq_along(files)){
-  x <- read.table(file = files[i], sep = "\t", header = F, as.is = T)
-  # as.is para no convertir tipo de datos
-  counts <- cbind(counts, x[,2])
-}
+load(paste0(workdir, "Ensembldb.RData")) # annotations_ENSG
+hsapiens_biotype <- select(annotations_ENSG, hgnc_symbol, gene_biotype)
+hsapiens_biotype <- hsapiens_biotype %>% distinct() # eliminar duplicados
+colnames(hsapiens_biotype)[1] <- "gene"
+```
+
+Clasificar los biotipos
+
+```{r, eval=FALSE}
+my_biotypes <- hsapiens_biotype[hsapiens_biotype$gene %in% all_genes,]
+dim(my_biotypes) # [1] 21949     2
 ```
 
 ---
 
-### Paso 4. Exploremos datos
+### Paso 3. Eliminar transcritos ribosomales
 
-```{r, eval = F}
-head(counts, 2)
-#         [,1]     [,2]     [,3]     [,4]     [,5]     [,6]     [,7]     [,8]
-# [1,]   342365   426305   353223   283129   346810   374542   256990   276412
-# [2,]  1101670  1231975  1232813   992671  1326029  1317793  1317426  1537736
+Ensembl tiene una gran [variedad de biotipos](https://www.ensembl.org/info/genome/genebuild/biotypes.html) anotados en sus genes, pero nosotros decidimos eliminar los ribosomales (rRNA), ribozimas (ribozyme) y  vault (vault_RNA).
+
+```{r, eval=FALSE}
+filtered_biotypes <- my_biotypes[!(my_biotypes$gene_biotype %in% c('vault_RNA','rRNA', 'ribozyme')), ]
 ```
 
-Observar el numero de genes (129239) (filas) y el numero de nuestras (8) (columnas).
+Al final nos quedamos con 21,816 genes en los 165 transcriptomas. 
 
-```{r, eval = F}
-dim(counts)
-# [1] 129239      8
-```
+> Los **vault RNA (vtRNA)** son pequeños ARN no codificantes que están asociados con la partícula Vault, una estructura citoplasmática de función aún no completamente entendida. En Ensembl, estos ARN están anotados como parte de las clases de ARN no codificantes (ncRNA).
 
 ---
 
-### Paso 5. Cargamos los metadatos
+### Paso 4. Cargamos los metadatos
 
 **¿Qué son los metadatos?**
 
@@ -530,77 +553,30 @@ Los metadatos nos van a dar la información acerca de las columnas / muestras de
 
 Estos datos son útiles para análisis posteriores, en los que queremos relacionar expresión diferencial con una condición o condiciones.
 
-Para esta clase, solo tenemos metadatos sobre el **tipo de muestra** (CONTROL, PLS_30min, PLS_15min & PLS_4h) [Kodali, *et al*. 2021. *Mol Psychiatry*](https://www.nature.com/articles/s41380-020-00955-5).
-
-Encuentra los metadatos [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/metadata.csv).
+Encuentra los metadatos [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/metadata/metadata.csv).
 
 ```{r, eval = F}
-metadata <- read.csv("/mnt/Guanina/bioinfo24/data/Clase_RNASeq2024/metadata.csv", header = F)
-colnames(metadata) <- c("sample_id", "type")
-head(metadata, 2)
-#     sample_id    type
-# 1 SRR12363092 CONTROL
-# 2 SRR12363093 CONTROL
+# Cargar archivos
+load(file = '../Practica_Dia3/counts/txi_filtered.RData') # filtered_txi
+# Cargar metadata
+metadata <- read.csv("../Practica_Dia3/metadata/metadata.csv", header = F)
 ```
 
 ---
 
-### Paso 6. Convertir a un dataframe
+### Paso 4. Cargamos los metadatos
 
-```{r, eval = F}
-counts <- as.data.frame(counts)
+Exploremos los datos
+
+```{r, eval=FALSE}
+head(filtered_txi$counts, 3)[,1:4]
+
+# QR011_0 QR011_1 QR011_2 QR011_3
+# A1BG     179.000 134.000 293.936 401.000
+# A1BG-AS1  69.977  76.949 144.290 205.607
+# A1CF       0.000   0.000   0.000   0.000
 ```
-
-### Paso 7. Colocar nombres de los genes en las filas
-
-```{r, eval = F}
-rownames(counts) <- x[,1] # x es el archivo original, no importa cual sea, tiene las mismas anotaciones
-```
-
-```{r, eval = F}
-# for(i in seq_along(files)){
-  # x <- read.table(file = files[i], sep = "\t", header = F, as.is = T)
-  # counts <- cbind(counts, x[,2])
-# }
-```
-
----
-
-### Paso 8. Colocar nombres de los transcriptomas en las columnas
-
-```{r, eval = F}
-colnames(counts) <- sub("_ReadsPerGene.out.tab", "", files)
-```
-
-
-```{r, eval = F}
-head(counts, 2)
-
-#                SRR12363092 SRR12363093 SRR12363095 SRR12363096 SRR12363098
-# N_unmapped          342365      426305      353223      283129      346810
-# N_multimapping     1101670     1231975     1232813      992671     1326029
-#                SRR12363099 SRR12363101 SRR12363102
-# N_unmapped          374542      256990      276412
-# N_multimapping     1317793     1317426     1537736
-```
-
-
-### Paso 9. Guardamos
-
-```{r, eval = F}
-save(metadata, counts, file = paste0(outdir, "counts/raw_counts.RData"))
-write.csv(counts, file = paste0(outdir,"counts/raw_counts.csv"))
-```
-
----
-
-## Descarga la matriz de cuentas 
-
-- En formato `.csv` [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv)
-
-- En formato `.RData` [aquí](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.RData)
-
-El script [`load_data_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/scripts/load_data_inR.R) se utilizo para obtener la matriz de cuentas.
+Vamos a ir viendo como estos valores cambian con la normalización. 
 
 ---
 
@@ -708,13 +684,13 @@ Para más ejemplos puedes verlos dando click [aquí](https://hbctraining.github.
 class: inverse, center, middle
 
 `r fontawesome::fa("terminal", height = "3em")`
-# 4. Detección y corrección por batch effect
+# 4. Detección y corrección por *batch effect*
 
 ---
 
-# Recordatorio: Corrección por Batch effect
+# Recordatorio: Corrección por *Batch effect*
 
-Buen diseño experimental con un minimo de 2 Réplicas biológicas, pero aún puede haber variación técnica.
+Buen diseño experimental con un minimo de 3 Réplicas biológicas, pero aún puede haber variación técnica.
 
 ```{r, echo=FALSE, out.width='60%', fig.align='center'}
 knitr::include_graphics("figures/batch_effect_pca2.png")
@@ -742,7 +718,7 @@ Para más ejemplos puedes verlos dando click [aquí](https://evayiwenwang.github
 
 ---
 
-# Detección de batch effect
+# Detección de *batch effect*
 
 ## Análisis de Componentes Principales (PCA)
 
@@ -799,16 +775,14 @@ class: inverse, center, middle
 ## El analisis de expresion diferencial se realiza en pares
 
 .pull-left[
-Siempre vamos a comparar al **CONTROL (no tratado)** VS una **Condición (tratado)**. Las comparaciones se realizan en pares.
+Siempre vamos a comparar al **CONTROL (no tratado)** VS una **Condición (pacientes con SLE)**. Las comparaciones se realizan en pares.
 
 El diseño que debemos darle a DESeq2 seria:
 
 ```{r, eval=FALSE}
-dds <- DESeqDataSetFromMatrix(countData =  counts, 
-            colData = metadata, design = ~type)
-
-levels(metadata$design)
-# 	CONTROL PLS_15min PLS_30min 	PLS_4h
+dds <- DESeqDataSetFromTximport(txi = txi,
+                                colData = metadata,
+                                design = ~Group)
 ```
 
 Designando que la referencia (ref) es el control.
@@ -831,23 +805,44 @@ knitr::include_graphics("figures/diseno_experimental.png")
 
 ```{r, eval=F}
 levels(dds$type)
-## [1] "Untreated"     "Dexamethasone"
+## [1] "CONTROL"     "SLE"
 ```
 
 Podemos renombrar contrastes
 
 ```{r, eval=FALSE}
-levels(dds$type) <- c("untrt", "trt")
+levels(dds$type) <- c("control", "sle")
 ```
-
-https://master.bioconductor.org/packages/release/workflows/vignettes/rnaseqGene/inst/doc/rnaseqGene.html#time-course-experiments
 
 ---
 
-## Analisis de expresion diferencial
+## Manejo de información
+
+Podemos seleccionar por tipos celulares
+
+```{r, eval=FALSE}
+mo_df <- metadata[metadata$Cell_type == 'monocyte',]
+mo_df$Group <-as.factor(mo_df$Group)
+dim(mo_df) #33 6
+```
+
+Despues aplicamos esta información en el dds
+
+```{r, eval=FALSE}
+dds_mo <- dds[,mo_df$sample_ID]
+dds_mo$Group <- relevel(dds_mo$Group, ref = 'Ctrl')
+unique(dds_mo$Group)
+# cambiamos el diseno
+design(dds_mo) <- ~Group
+save(dds_mo, file = paste0(ddsDir, 'dds_mo.RData'))
+```
+
+---
+
+## Analisis de expresión diferencial
 
 ```{r, eval=F}
-dds <- DESeq(dds)
+dds_mo <- DESeq(dds_mo)
 
 # estimating size factors
 # estimating dispersions
@@ -859,15 +854,23 @@ dds <- DESeq(dds)
 
 ---
 
-## Obtener informacion de los contrastes
+## Obtener información de los contrastes
 
 ```{r, eval=F}
 # Opcion A
-results(dds, name = "type_PLS_15min_vs_CONTROL")
+resultsNames(dds_mo) # lists the coefficients
+# [1] "Intercept"            "Group_SLE_vs_Ctrl"
 
 # Opcion B
 # results(dds, contrast = c("condition", "treated", "untreated"))
-results(dds, contrast = c("type", "PLS_15min", "CONTROL"))
+res_mo <- results(dds_mo, contrast=c("Group", "SLE", "Ctrl"))
+res_mo_Ordered <- res_mo[order(res_mo$padj),]
+summary(res_mo_Ordered)
+
+# LFC > 0 (up)       : 121, 0.55%
+# LFC < 0 (down)     : 23, 0.11%
+# outliers [1]       : 0, 0%
+#low counts [2]     : 7903, 36%
 ```
 
 ---
@@ -877,6 +880,8 @@ results(dds, contrast = c("type", "PLS_15min", "CONTROL"))
 En el siguiente ejemplo utilizamos datos de LUPUS, en donde tenemos 3 variables de interes: 
 
 - `Group`: son las condiciones (control, paciente).
+
+- `Cell_type`: Tipos celulares
 
 - `Dose_category`: Dosis de corticoides solo en los pacientes.
 
@@ -894,6 +899,22 @@ Podemos crear una categoria que combine la informacion en las variables:
 ```{r, eval=F}
 dds$Internal <- factor(paste(dds$SLEDAI_category, dds$Group, sep="_"))
 ```
+
+---
+
+## Podemos unir la información 3 variables por cada grupo
+
+Extraer la informacion de controles y luego unir las variables de esta manera
+
+```{r, eval=F}
+dds <- DESeqDataSetFromTximport(txi = filtered_txi,
+                                colData = metadata,
+                                design = ~ Dose_category + Cell_type + SLEDAI_category)
+dds
+```
+
+
+El script completo se encuentra en [DEG_analysis.R](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/DEG_analysis.R).
 
 ---
 class: inverse, center, middle
