@@ -121,9 +121,13 @@ Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB202
 
   **9)** Análisis de Terminos funcionales (GO terms)
 
+## Clase para mejorar tus skills
+
+- Crear llaves y alias
+
+Puedes crear llaves (ssh-keygen) y alias para acceder a los servidores de una manera segura y rápida: https://github.com/EveliaCoss/keygen
+
 ## Clase de retroalimentación (Fecha pendiente)
-
-
 
 
 ## Cursos para practicar 📕

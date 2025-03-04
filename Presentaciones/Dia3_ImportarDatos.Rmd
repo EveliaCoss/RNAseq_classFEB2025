@@ -417,14 +417,6 @@ knitr::include_graphics("figures/SLE_flow.jpg")
 
   **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. 
 
-- Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
-
-  **8)** Visualización de los datos
-
-- Script [`GOterms_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia4/scripts/GOterms_analysis.R):
-
-  **9)** Análisis de términos funcionales (GO terms)
-
 ---
 
 ### Paso 1. Importar los archivos de cuentas a R
@@ -618,6 +610,11 @@ knitr::include_graphics("figures/normalization.png")
 ```
 ]
 
+
+.left[.footnote[.black[
+Revisa el [manual de DESEq](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#contrasts)
+]]]
+
 ---
 
 ## Métodos de normalización
@@ -652,6 +649,35 @@ Ejemplo: Si tenemos 5 millones de reads o lecturas (M). Y la mayoría  de ellos 
 .left[.footnote[.black[
 Para más ejemplos puedes verlos dando click [aquí](https://www.reneshbedre.com/blog/expression_units.html).
 ]]]
+
+---
+
+## Empleo de Z-score para graficas
+
+La normalización con **Z-score** transforma los datos para que cada gen tenga una media de 0 y una desviación estándar de 1. Esto permite comparar genes con diferentes niveles de expresión en la misma escala.
+
+> Motivo: Los genes con varianza cero tienen la misma expresión en todas las muestras y no aportan información útil.
+
+.pull-left[
+
+```{r, eval=FALSE}
+# 1) Filtar genes de varianza cero
+var_non_zero <- apply(counts, 1, var) !=0 
+# 2) Aplicar z-score
+filtered_counts <- counts[var_non_zero, ]
+# transponer
+zscores <- t(scale(t(filtered_counts)))
+dim(zscores) #[1] 18782   165
+# 3) convertir a matriz
+zscore_mat <- as.matrix(zscores)
+```
+]
+
+.pull-right[
+```{r, echo=FALSE, out.width='100%', fig.align='center'}
+knitr::include_graphics("figures/SLE_heatmap_zscore.png")
+```
+]
 
 ---
 
@@ -917,6 +943,28 @@ dds
 El script completo se encuentra en [DEG_analysis.R](https://github.com/EveliaCoss/RNAseq_classFEB2025/blob/main/Practica_Dia3/scripts/DEG_analysis.R).
 
 ---
+
+### Pipeline
+
+>  Especie: *Mus musculus*, Alineamiento: STAR, Conteo: STAR
+
+- Script [`load_data_inR.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/load_data_inR.R):
+
+  **1)** Importar datos en R (archivo de cuentas) + metadatos y **2)** Crear una matriz de cuentas con todos los transcriptomas. 
+
+- Script [`DEG_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/DEG_analysis.R):
+
+  **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG. Input: [raw_counts.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/raw_counts.csv) y  [metadata.csv](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia2/data/metadata.csv)
+
+- Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
+
+  **8)** Visualización de los datos
+
+- Script [`GOterms_analysis.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia4/scripts/GOterms_analysis.R):
+
+  **9)** Análisis de términos funcionales (GO terms)
+
+---
 class: inverse, center, middle
 
 `r fontawesome::fa("laptop-code", height = "3em")`
@@ -948,6 +996,38 @@ Es buena idea comenzar **todos** tus scripts con las mismas líneas de código q
 Ejemplo de Bonita documentación de codigo da click [aqui](https://github.com/mdozmorov/dcaf/tree/master/ngs.rna-seq)
 
 ---
+
+## Actividad grupal
+
+### Generar llaves de seguridad
+
+¿Tienen acceso rápido y seguro al clúster? ✅🔑
+
+Si la respuesta es no, pueden seguir este [tutorial](https://github.com/EveliaCoss/keygen) para generar sus llaves de acceso de manera sencilla y segura. 🚀
+
+---
+
+## Actividad en equipo
+### Creación de un Diagrama de Flujo para el Análisis de RNA-seq
+
+Ahora que hemos explorado las distintas estrategias para el análisis de datos de RNA-seq, trabajen en equipo para diseñar un diagrama de flujo que represente claramente su flujo de trabajo.
+
+Su diagrama debe incluir:
+**1)** Pasos clave del análisis (por ejemplo, control de calidad, alineamiento, cuantificación, normalización, análisis diferencial).
+**2)** Programas o herramientas que utilizarán en cada etapa (como FastQC, STAR, Salmon, DESeq2, EdgeR, etc.).
+**3)** Archivos de entrada y archivos de salida en cada paso (FASTQ, BAM, counts matrices, etc.).
+**4)** Opciones o parámetros importantes, si lo consideran relevante.
+
+💡 Ideas adicionales:
+
+- Utilicen diagramas claros y estructurados con flechas que indiquen el flujo de los datos.
+- Pueden hacerlo en herramientas como draw.io, BioRender, PowerPoint, o incluso a mano si prefieren algo rápido y esquemático.
+- Si hay diferencias en los enfoques de análisis entre los equipos, comparen sus diagramas y discutan las ventajas de cada uno.
+
+📌 Objetivo: Tener una visión clara y estructurada de su flujo de trabajo antes de comenzar el análisis. 🚀
+
+---
+
 class: center, middle
 
 `r fontawesome::fa("code", height = "3em")`
