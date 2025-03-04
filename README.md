@@ -113,6 +113,8 @@ Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB202
 
   **3)** Crear el archivo `dds` con `DESeq2`, **4)** Correr el análisis de Expresión Diferencial de los Genes (DEG), **5)** Normalización de los datos, **6)** Detección de batch effect y **7)** Obtener los resultados de los contraste de DEG
 
+Los siguientes script se pueden emplear para todas las especies, siendo sencillo su formato y empleo:
+
 - Script [`VisualizacionDatos.R`](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Practica_Dia3/scripts/VisualizacionDatos.R):
 
   **8)** Visualización de los datos
@@ -127,7 +129,7 @@ Ejemplo de entregable: [Reporte](https://eveliacoss.github.io/RNAseq_classFEB202
 
 Puedes crear llaves (ssh-keygen) y alias para acceder a los servidores de una manera segura y rápida: https://github.com/EveliaCoss/keygen
 
-## Clase de retroalimentación (Fecha pendiente)
+## Clase de retroalimentación (29 de abril 2025)
 
 
 ## Cursos para practicar 📕
