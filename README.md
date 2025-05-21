@@ -129,8 +129,14 @@ Los siguientes script se pueden emplear para todas las especies, siendo sencillo
 
 Puedes crear llaves (ssh-keygen) y alias para acceder a los servidores de una manera segura y rápida: https://github.com/EveliaCoss/keygen
 
-## Clase de retroalimentación (29 de abril 2025)
+## Clase de retroalimentación (21 de mayo 2025)
 
+- Presentación: [Clase de retro](https://docs.google.com/presentation/d/1t1QncQhAPabKSAeOYrlCdvL3zXqKDBJ6VsXWkYHsn5Q/edit?usp=sharing)
+- Script de repaso: [Ejemplo Michael Love](https://github.com/EveliaCoss/RNAseq_classFEB2024/blob/main/Retroalimentacion_Bioinfo2024.R)
+- Informacion fuente:
+    + [Analyzing RNA-seq data with DESeq2 - Michael Love - Contrast](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#contrasts)
+    + [tutorial about contrasts](https://github.com/tavareshugo/tutorial_DESeq2_contrasts)
+    + [tutorial about contrasts - code](https://github.com/tavareshugo/tutorial_DESeq2_contrasts/blob/main/DESeq2_contrasts.md)
 
 ## Cursos para practicar 📕
 
